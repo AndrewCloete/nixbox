@@ -77,5 +77,12 @@
     enable = true;
     userName  = "user";
     userEmail = "user@gmail.com";
+    aliases = {
+    	ga = "add";
+	gaa = "add --All";
+	gc = "commit";
+	gss = "status -s";
+	gco = "checkout";
+    };
   };
 }
