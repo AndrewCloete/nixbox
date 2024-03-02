@@ -93,11 +93,24 @@
 	  };
 	  history.size = 10000;
 	  history.path = "${config.xdg.dataHome}/zsh/history";
+		plugins = [
+			{
+				# This installs the p10k ZSH plugin from the nix packages store
+				name = "powerlevel10k";
+				src = pkgs.zsh-powerlevel10k;
+				file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+			}
+			{
+				# This install my p10k ZSH config from local directory
+				name = "powerlevel10k-config";
+				src = pkgs.lib.cleanSource .zsh/p10k-config;
+				file = "p10k.zsh";
+			}
+		];
 	  oh-my-zsh = {
 	    enable = true;
-	    # git plugin adds short aliases by default
+	    # git plugin also adds short aliases by default
 	    plugins = [ "git"];
-	    theme = "robbyrussell";
 	  };
 	};
 	programs.tmux = {
