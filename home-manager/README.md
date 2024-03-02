@@ -18,6 +18,25 @@ home-manager switch --flake .#user
 home-manager switch
 ```
 
+## zsh as default shell
+Linux will only allow you to `chsh` on shell listed in `/etc/shells`. But since
+`home-manager` installes `zsh`, you need to manually add the path there as root
+
+```sh
+# Check path of zsh
+which zsh
+# Add to shells as root
+su -
+vi /etc/shells
+
+# Then exit back to user
+exit
+# Now chsh should work
+chsh -s $(which zsh)
+
+# Log out/in to see change
+```
+
 # Quick-ref
 ```sh
 man home-configuration.nix

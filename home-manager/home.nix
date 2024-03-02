@@ -67,7 +67,7 @@
   #  /etc/profiles/per-user/user/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
@@ -77,12 +77,24 @@
     enable = true;
     userName  = "user";
     userEmail = "user@gmail.com";
-    aliases = {
-    	ga = "add";
-	gaa = "add --All";
-	gc = "commit";
-	gss = "status -s";
-	gco = "checkout";
-    };
   };
+	programs.zsh = {
+	  # See README.md on how to set as default shell with chsh
+	  enable = true;
+	  enableCompletion = true;
+	  enableAutosuggestions = true;
+	  syntaxHighlighting.enable = true;
+
+	  shellAliases = {
+	    ll = "ls -l";
+	  };
+	  history.size = 10000;
+	  history.path = "${config.xdg.dataHome}/zsh/history";
+	  oh-my-zsh = {
+	    enable = true;
+	    # git plugin adds short aliases by default
+	    plugins = [ "git"];
+	    theme = "robbyrussell";
+	  };
+	};
 }
