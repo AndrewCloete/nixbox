@@ -11,16 +11,15 @@
   };
 
   outputs = { nixpkgs, home-manager, ... }:
-    let
-      system = "aarch64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
+     {
       homeConfigurations."user" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+	# For Mac ARM. Create another "homeConfiguration" for other systems
+	pkgs = nixpkgs.legacyPackages."aarch64-darwin";
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [ ./home.nix ];
+
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
