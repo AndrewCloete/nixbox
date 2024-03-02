@@ -71,13 +71,16 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  programs.neovim = { enable = true; vimAlias = true; vimdiffAlias = true; };
-  programs.git = {
-    enable = true;
-    userName  = "user";
-    userEmail = "user@gmail.com";
-  };
+	programs.home-manager.enable = true;
+
+	programs.neovim = { enable = true; vimAlias = true; vimdiffAlias = true; };
+
+	programs.git = {
+		enable = true;
+		userName  = "user";
+		userEmail = "user@gmail.com";
+	};
+
 	programs.zsh = {
 	  # See README.md on how to set as default shell with chsh
 	  enable = true;
@@ -96,5 +99,12 @@
 	    plugins = [ "git"];
 	    theme = "robbyrussell";
 	  };
+	};
+	programs.tmux = {
+	  enable = true;
+	  clock24 = true;
+	  extraConfig = ''
+		  ${builtins.readFile ./tmux/tmux.conf}
+	  '';
 	};
 }
