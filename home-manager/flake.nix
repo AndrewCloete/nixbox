@@ -12,13 +12,13 @@
 
   outputs = { nixpkgs, home-manager, ... }:
      {
-      homeConfigurations."user" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."aarch64-darwin" = home-manager.lib.homeManagerConfiguration {
 	# For Mac ARM. Create another "homeConfiguration" for other systems
 	pkgs = nixpkgs.legacyPackages."aarch64-darwin";
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./home.nix ];
+        modules = [ ./home_aarch64-darwin.nix ];
 
 
         # Optionally use extraSpecialArgs
