@@ -103,7 +103,7 @@
 			{
 				# This install my p10k ZSH config from local directory
 				name = "powerlevel10k-config";
-				src = pkgs.lib.cleanSource .zsh/p10k-config;
+				src = pkgs.lib.cleanSource ./zsh/p10k-config;
 				file = "p10k.zsh";
 			}
 		];
