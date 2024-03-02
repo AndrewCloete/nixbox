@@ -49,6 +49,14 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+
+	# Copies in the neovim directory as is
+	# See program.neovim on how it is used
+	"./.config/nvim/" = {
+	     source = ./nvim;
+	     recursive = true;
+	   };
+
   };
 
   # Home Manager can also manage your environment variables through
@@ -70,10 +78,16 @@
     EDITOR = "nvim";
   };
 
+
+
   # Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
 
-	programs.neovim = { enable = true; vimAlias = true; vimdiffAlias = true; };
+	programs.neovim = { 
+	enable = true; vimAlias = true; vimdiffAlias = true; 
+	extraConfig = ":luafile ~/.config/nvim/init.lua";
+	extraPackages = [pkgs.gcc pkgs.stylua];
+	};
 
 	programs.git = {
 		enable = true;
