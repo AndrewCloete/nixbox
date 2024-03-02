@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
-
+let
+  homeDirectory = "/Users/user";
+  dir_tbx = "${homeDirectory}/toolbox";
+  dir_nb = "${homeDirectory}/Workspace/notebook";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "user";
-  home.homeDirectory = "/Users/user";
+  home.homeDirectory = "${homeDirectory}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -16,13 +20,14 @@
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
-  # environment.
+  # environment.lua print(vim.inspect(vim.lsp.get_active_clients()))
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
+    # # "Hello, world!" when run.lua print(vim.inspect(vim.lsp.get_active_clients()))
     # pkgs.hello
     pkgs.cargo
     pkgs.rustc
+    pkgs.eza
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -107,7 +112,23 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
+      tbx = "cd ${dir_tbx}";
+      ha = "cd ${homeDirectory}/nixbox/home-manager";
+      nb = "cd ${dir_nb}";
+      "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
+      x = "exit";
       ll = "ls -l";
+      ls = "eza --icons --git --long";
+      lt = "eza --tree --level=2 --long --icons --git";
+      gtd = "gtd-cli";
+      dc = "docker-compose";
+      dcud = "docker-compose up -d";
+      dcb = "docker-compose build";
+      dck = "docker-compose kill";
+      dcs = "docker-compose stop";
+      dcdv = "docker-compose down -v";
+      dcl = "docker-compose logs";
+      dclt = "docker-compose logs --tail=100";
     };
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";

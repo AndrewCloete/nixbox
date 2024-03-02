@@ -577,6 +577,8 @@ local servers = {
 	-- tsserver = {},
 	-- clangd = {},
 	-- gopls = {},
+
+	-- When I installed rnix using Mason, then formatting worked...
 	nil_ls = {}, -- LSP for Nix language
 	rust_analyzer = {
 		settings = {
