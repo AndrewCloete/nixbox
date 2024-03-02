@@ -21,6 +21,8 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    pkgs.cargo
+    pkgs.rustc
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -50,12 +52,12 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-	# Copies in the neovim directory as is
-	# See program.neovim on how it is used
-	"./.config/nvim/" = {
-	     source = ./nvim;
-	     recursive = true;
-	   };
+    # Copies in the neovim directory as is
+    # See program.neovim on how it is used
+    "./.config/nvim/" = {
+      source = ./nvim;
+      recursive = true;
+    };
 
   };
 
@@ -81,57 +83,59 @@
 
 
   # Let Home Manager install and manage itself.
-	programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
 
-	programs.neovim = { 
-	enable = true; vimAlias = true; vimdiffAlias = true; 
-	extraConfig = ":luafile ~/.config/nvim/init.lua";
-	extraPackages = [pkgs.gcc pkgs.stylua];
-	};
+  programs.neovim = {
+    enable = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    extraConfig = ":luafile ~/.config/nvim/init.lua";
+    extraPackages = [ pkgs.gcc pkgs.stylua ];
+  };
 
-	programs.git = {
-		enable = true;
-		userName  = "user";
-		userEmail = "user@gmail.com";
-	};
+  programs.git = {
+    enable = true;
+    userName = "user";
+    userEmail = "user@gmail.com";
+  };
 
-	programs.zsh = {
-	  # See README.md on how to set as default shell with chsh
-	  enable = true;
-	  enableCompletion = true;
-	  enableAutosuggestions = true;
-	  syntaxHighlighting.enable = true;
+  programs.zsh = {
+    # See README.md on how to set as default shell with chsh
+    enable = true;
+    enableCompletion = true;
+    enableAutosuggestions = true;
+    syntaxHighlighting.enable = true;
 
-	  shellAliases = {
-	    ll = "ls -l";
-	  };
-	  history.size = 10000;
-	  history.path = "${config.xdg.dataHome}/zsh/history";
-		plugins = [
-			{
-				# This installs the p10k ZSH plugin from the nix packages store
-				name = "powerlevel10k";
-				src = pkgs.zsh-powerlevel10k;
-				file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-			}
-			{
-				# This install my p10k ZSH config from local directory
-				name = "powerlevel10k-config";
-				src = pkgs.lib.cleanSource ./zsh/p10k-config;
-				file = "p10k.zsh";
-			}
-		];
-	  oh-my-zsh = {
-	    enable = true;
-	    # git plugin also adds short aliases by default
-	    plugins = [ "git"];
-	  };
-	};
-	programs.tmux = {
-	  enable = true;
-	  clock24 = true;
-	  extraConfig = ''
-		  ${builtins.readFile ./tmux/tmux.conf}
-	  '';
-	};
+    shellAliases = {
+      ll = "ls -l";
+    };
+    history.size = 10000;
+    history.path = "${config.xdg.dataHome}/zsh/history";
+    plugins = [
+      {
+        # This installs the p10k ZSH plugin from the nix packages store
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
+        # This install my p10k ZSH config from local directory
+        name = "powerlevel10k-config";
+        src = pkgs.lib.cleanSource ./zsh/p10k-config;
+        file = "p10k.zsh";
+      }
+    ];
+    oh-my-zsh = {
+      enable = true;
+      # git plugin also adds short aliases by default
+      plugins = [ "git" ];
+    };
+  };
+  programs.tmux = {
+    enable = true;
+    clock24 = true;
+    extraConfig = ''
+      		  ${builtins.readFile ./tmux/tmux.conf}
+      	  '';
+  };
 }
