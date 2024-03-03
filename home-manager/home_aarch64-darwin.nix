@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   homeDirectory = "/Users/user";
   dir_tbx = "${homeDirectory}/toolbox";
@@ -21,13 +21,13 @@ in
 
   # The home.packages option allows you to install Nix packages into your
   # environment.lua print(vim.inspect(vim.lsp.get_active_clients()))
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.lua print(vim.inspect(vim.lsp.get_active_clients()))
-    # pkgs.hello
-    pkgs.rustup
-    pkgs.eza
-    pkgs.fd
+  home.packages = with pkgs; [
+    git
+    rustup
+    eza
+    fd
+    ripgrep
+    xh
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -123,9 +123,10 @@ in
 
     shellAliases = {
       tbx = "cd ${dir_tbx}";
-      ha = "cd ${homeDirectory}/nixbox/home-manager";
+      hm = "cd ${homeDirectory}/nixbox/home-manager";
       nb = "cd ${dir_nb}";
       "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
+      rzsh = ". ${homeDirectory}/.zshrc";
       x = "exit";
       ll = "ls -l";
       ls = "eza --icons --git --long";
@@ -176,4 +177,7 @@ in
       		  ${builtins.readFile ./tmux/tmux.conf}
       	  '';
   };
+
+  imports = [ ./extras.nix ];
+
 }
