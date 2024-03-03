@@ -25,9 +25,9 @@ in
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.lua print(vim.inspect(vim.lsp.get_active_clients()))
     # pkgs.hello
-    pkgs.cargo
-    pkgs.rustc
+    pkgs.rustup
     pkgs.eza
+    pkgs.fd
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -84,6 +84,9 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+  home.sessionPath = [
+    "${homeDirectory}/.cargo/bin"
+  ];
 
 
 
@@ -110,6 +113,13 @@ in
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = true;
+
+    # This is the suggested workaround for the issue where the zsh PATH is
+    # overwritten. Hopefully fixed somewhere in the future. See
+    # https://github.com/nix-community/home-manager/issues/2991
+    profileExtra = pkgs.lib.optionalString (config.home.sessionPath != [ ]) ''
+      export PATH="$PATH''${PATH:+:}${pkgs.lib.concatStringsSep ":" config.home.sessionPath}"
+    '';
 
     shellAliases = {
       tbx = "cd ${dir_tbx}";
@@ -152,8 +162,15 @@ in
       plugins = [ "git" ];
     };
   };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.tmux = {
     enable = true;
+    sensibleOnTop = false; # Don't use "sensible" plugin. Causes "reattach-to-user..." issue
     clock24 = true;
     extraConfig = ''
       		  ${builtins.readFile ./tmux/tmux.conf}
