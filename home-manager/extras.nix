@@ -4,6 +4,7 @@
 }: {
   home.packages = [
     pkgs.awscli2
+    pkgs.ssm-session-manager-plugin
     pkgs.nodejs-18_x
     pkgs.python310
     pkgs.nodePackages."aws-cdk"
