@@ -127,6 +127,7 @@ in
       nb = "cd ${dir_nb}";
       "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
       rzsh = ". ${homeDirectory}/.zshrc";
+      dm = "node ${homeDirectory}/Workspace/digemy/digemy.devops/cli/dist/cli.js";
       x = "exit";
       ll = "ls -l";
       ls = "eza --icons --git --long";
