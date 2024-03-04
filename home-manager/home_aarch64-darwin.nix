@@ -3,6 +3,7 @@ let
   homeDirectory = "/Users/user";
   dir_tbx = "${homeDirectory}/toolbox";
   dir_nb = "${homeDirectory}/Workspace/notebook";
+  dir_se = "${homeDirectory}/Workspace/spatialedge";
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -126,6 +127,7 @@ in
       tbx = "cd ${dir_tbx}";
       hm = "cd ${homeDirectory}/nixbox/home-manager";
       nb = "cd ${dir_nb}";
+      se = "cd ${dir_se}";
       "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
       rzsh = ". ${homeDirectory}/.zshrc";
       dm = "node ${homeDirectory}/Workspace/digemy/digemy.devops/cli/dist/cli.js";
