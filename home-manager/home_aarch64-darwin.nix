@@ -4,6 +4,7 @@ let
   dir_tbx = "${homeDirectory}/toolbox";
   dir_nb = "${homeDirectory}/Workspace/notebook";
   dir_se = "${homeDirectory}/Workspace/spatialedge";
+  dir_vulture = "${homeDirectory}/Vulture";
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -24,12 +25,14 @@ in
   # environment.lua print(vim.inspect(vim.lsp.get_active_clients()))
   home.packages = with pkgs; [
     git
-    rustup
+    htop
     eza
     fd
     ripgrep
+    jq
     xh
     watchexec
+    rustup
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -128,6 +131,9 @@ in
       hm = "cd ${homeDirectory}/nixbox/home-manager";
       nb = "cd ${dir_nb}";
       se = "cd ${dir_se}";
+      awsl = "${dir_se}/scripts/vodacom-aws-auth/env/bin/python ${dir_se}/scripts/vodacom-aws-auth/aws_auth.py";
+      "rts-env" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
+      "rts-env-pip" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
       "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
       rzsh = ". ${homeDirectory}/.zshrc";
       dm = "node ${homeDirectory}/Workspace/digemy/digemy.devops/cli/dist/cli.js";
