@@ -25,13 +25,15 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
     git
+    unzip
+    wget
     htop
     eza
     fd
     ripgrep
     jq
     xh
-    rustup
+    rustup # run `rustup default stable` to install rustc and cargo
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

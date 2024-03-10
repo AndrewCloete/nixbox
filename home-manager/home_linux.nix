@@ -2,7 +2,7 @@
 let
   params = {
     user = "user";
-    homeDirectory = "/Users/user";
+    homeDirectory = "/home/user";
   };
 in
 {
