@@ -25,8 +25,8 @@
         extraSpecialArgs = { inherit inputs; };
       };
       homeConfigurations."linux" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."linux";
-        modules = [ ./linux.nix ];
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ ./home_linux.nix ];
       };
     };
 }
