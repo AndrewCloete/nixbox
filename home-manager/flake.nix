@@ -28,5 +28,9 @@
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [ ./home_linux.nix ];
       };
+      homeConfigurations."capealoe" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ ./home_capealoe.nix ];
+      };
     };
 }
