@@ -125,7 +125,7 @@ require("lazy").setup({
 	},
 
 	-- Useful plugin to show you pending keybinds.
-	{ "folke/which-key.nvim", opts = {} },
+	{ "folke/which-key.nvim",          opts = {} },
 	{
 		-- Adds git releated signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -212,7 +212,7 @@ require("lazy").setup({
 	},
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
+	{ "numToStr/Comment.nvim",         opts = {} },
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{ "nvim-telescope/telescope.nvim", tag = "0.1.4", dependencies = { "nvim-lua/plenary.nvim" } },
@@ -389,9 +389,11 @@ vim.keymap.set("n", "<leader>cl", "i- [ ] ")
 if vim.api.nvim_win_get_option(0, "diff") then
 	-- Better colors
 	-- Is there a more elegant way to set these rather than calling the nvim_command? Can't these be set using options?
-	vim.api.nvim_command("hi DiffAdd    ctermfg=232 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none")
+	vim.api.nvim_command(
+	"hi DiffAdd    ctermfg=232 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none")
 	vim.api.nvim_command("hi DiffChange ctermbg=white  guibg=#ececec gui=none   cterm=none")
-	vim.api.nvim_command("hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none")
+	vim.api.nvim_command(
+	"hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none")
 end
 
 vim.keymap.set("n", "]c", ":Gitsigns next_hunk<CR>")
@@ -583,6 +585,7 @@ local servers = {
 	-- gopls = {},
 
 	-- When I installed rnix using Mason, then formatting worked...
+	lemminx = {},
 	nil_ls = {}, -- LSP for Nix language
 	jdtls = {},
 	rust_analyzer = {
