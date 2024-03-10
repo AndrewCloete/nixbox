@@ -10,6 +10,8 @@ Don't run `home-manager init` since you want to use the flake define in the repo
 Instead, To install for user "user" from current directory:
 ```sh
 home-manager switch --flake .#aarch64-darwin
+# or 
+home-manager switch --flake .#linux
 ```
 
 ```sh

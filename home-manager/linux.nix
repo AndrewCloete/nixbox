@@ -1,0 +1,13 @@
+{ inputs, config, pkgs, ... }:
+let
+  params = {
+    user = "user";
+    homeDirectory = "/Users/user";
+  };
+in
+{
+  home.stateVersion = "23.11"; # Please read the comment before changing.
+  imports = [
+    (import ./base.nix ({ inherit config pkgs params; }))
+  ];
+}
