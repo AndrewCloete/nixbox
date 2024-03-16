@@ -27,12 +27,15 @@
     git
     unzip
     wget
+    xh
+    curl
     htop
+    btop
+    tldr
     eza
     fd
     ripgrep
     jq
-    xh
     rustup # run `rustup default stable` to install rustc and cargo
   ];
 

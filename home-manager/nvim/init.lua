@@ -78,6 +78,7 @@ require("lazy").setup({
 	"tpope/vim-fugitive",
 	"tpope/vim-rhubarb",
 	"f-person/git-blame.nvim",
+	"idanarye/vim-merginal",
 
 	-- Detect tabstop and shiftwidth automatically
 	"tpope/vim-sleuth",
@@ -745,7 +746,7 @@ null_ls.setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.g.markdown_fenced_languages = { "html", "python", "bash", "sh", "json", "rust" }
+vim.g.markdown_fenced_languages = { "html", "python", "bash", "sh", "json", "rust", "java" }
 
 -- Default netrw to tree view
 vim.g.netrw_liststyle = 3
