@@ -32,5 +32,9 @@
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [ ./home_capealoe.nix ];
       };
+      homeConfigurations."citrix" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ ./home_citrix.nix ];
+      };
     };
 }
