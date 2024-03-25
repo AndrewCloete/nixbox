@@ -25,6 +25,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    gpg
     git
     unzip
     wget
