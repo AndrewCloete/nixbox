@@ -115,7 +115,6 @@
     # See README.md on how to set as default shell with chsh
     enable = true;
     enableCompletion = true;
-    historySubstringSearch.enable = true;
     history.share = false;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false; # Warning, makes paste slow
