@@ -292,6 +292,7 @@ require("telescope").setup({
 				["<C-d>"] = false,
 			},
 		},
+		path_display = { "truncate" },
 	},
 	extensions = {
 		file_browser = {
@@ -760,7 +761,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_command("hi TreesitterContextBottom gui=underline guisp=Grey")
 
 -- Set hls color
-vim.api.nvim_command("hi Search guibg=grey guifg=wheat")
+-- vim.api.nvim_command("hi Search guibg=grey guifg=wheat")
 -- vim.api.nvim_command("hi DiffAdd guifg=NONE ctermfg=NONE guibg=#464632 ctermbg=238 gui=NONE cterm=NONE")
 -- vim.api.nvim_command("hi DiffChange guifg=NONE ctermfg=NONE guibg=#335261 ctermbg=239 gui=NONE cterm=NONE")
 -- vim.api.nvim_command("hi DiffDelete guifg=#f43753 ctermfg=203 guibg=#79313c ctermbg=237 gui=NONE cterm=NONE")

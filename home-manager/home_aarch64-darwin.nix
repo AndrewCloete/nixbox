@@ -22,6 +22,10 @@ in
 
   home.packages = with pkgs; [
     watchexec
+    maven
+    jdk17
+    ansible
+    ts
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -31,6 +35,7 @@ in
   home.sessionVariables = { };
   home.sessionPath = [
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    "/Applications/Meld.app/Contents/MacOS"
   ];
 
   programs.zsh.shellAliases = {

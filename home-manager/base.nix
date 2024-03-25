@@ -1,3 +1,4 @@
+# For all options see https://nix-community.github.io/home-manager/options.xhtml
 { config
 , pkgs
 , params
@@ -115,6 +116,7 @@
     enableCompletion = true;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false; # Warning, makes paste slow
+    defaultKeymap = "viins"; # vim mode
 
     # This is the suggested workaround for the issue where the zsh PATH is
     # overwritten. Hopefully fixed somewhere in the future. See
