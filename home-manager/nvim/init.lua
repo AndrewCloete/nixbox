@@ -145,10 +145,6 @@ require("lazy").setup({
 	{
 		-- Theme inspired by Atom
 		"navarasu/onedark.nvim",
-		priority = 2,
-		config = function()
-			vim.cmd.colorscheme("onedark")
-		end,
 	},
 
 	-- {
@@ -260,6 +256,11 @@ require("lazy").setup({
 	--    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
 	-- { import = "custom.plugins" },
 }, {})
+
+require("onedark").setup({
+	style = "deep",
+})
+require("onedark").load()
 
 -- [[ Basic Keymaps ]]
 

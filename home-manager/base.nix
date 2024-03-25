@@ -25,7 +25,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    gpg
+    gnupg
     git
     unzip
     wget
@@ -115,6 +115,8 @@
     # See README.md on how to set as default shell with chsh
     enable = true;
     enableCompletion = true;
+    historySubstringSearch.enable = true;
+    history.share = false;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false; # Warning, makes paste slow
     defaultKeymap = "viins"; # vim mode
