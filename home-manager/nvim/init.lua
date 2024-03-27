@@ -94,6 +94,17 @@ require("lazy").setup({
 
 	"nvim-tree/nvim-web-devicons",
 	-- 'onsails/lspkind-nvim',
+	--
+	{
+		"folke/zen-mode.nvim",
+		opts = {
+			plugins = {
+				tmux = { enabled = false },
+				gitsigns = { enabled = false 
+					,
+			},
+		},
+	},
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
@@ -657,7 +668,7 @@ luasnip.config.setup({})
 local s = luasnip.snippet
 local f = luasnip.function_node
 
-luasnip.add_snippets("markdown", {
+local markdown_snippets = {
 	s("td", {
 		f(function(args, snip)
 			return {
@@ -687,7 +698,34 @@ luasnip.add_snippets("markdown", {
 			return { "@b" .. os.date("%Y%m%d") }
 		end, {}),
 	}),
-})
+	s("x", {
+		f(function(args, snip)
+			return { "#x" }
+		end, {}),
+	}),
+	s("to", {
+		f(function(args, snip)
+			return { "@todo" }
+		end, {}),
+	}),
+	s("wip", {
+		f(function(args, snip)
+			return { "@wip" }
+		end, {}),
+	}),
+}
+
+local common_contexts = { "rel", "mail", "proj", "read", "err", "sat", "rnd", "admin" }
+for _, ctx in ipairs(common_contexts) do
+	table.insert(
+		markdown_snippets,
+		s(ctx, { f(function(args, snip)
+			return { "#x" .. ctx }
+		end, {}) })
+	)
+end
+
+luasnip.add_snippets("markdown", markdown_snippets)
 
 cmp.setup({
 	snippet = {

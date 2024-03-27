@@ -106,6 +106,7 @@
     enable = true;
     sensibleOnTop = false; # Don't use "sensible" plugin. Causes "reattach-to-user..." issue
     clock24 = true;
+    customPaneNavigationAndResize = true;
     extraConfig = ''
       		  ${builtins.readFile ./tmux/tmux.conf}
       	  '';
@@ -118,7 +119,6 @@
     history.share = false;
     enableAutosuggestions = true;
     syntaxHighlighting.enable = false; # Warning, makes paste slow
-    defaultKeymap = "viins"; # vim mode
 
     # This is the suggested workaround for the issue where the zsh PATH is
     # overwritten. Hopefully fixed somewhere in the future. See
@@ -163,6 +163,7 @@
       # git plugin also adds short aliases by default
       plugins = [ "git" ];
     };
+    defaultKeymap = "viins"; # vim mode
   };
 
   programs.fzf = {
