@@ -1,13 +1,13 @@
 { inputs, config, pkgs, ... }:
 let
-  params = {
+  params = rec {
     user = "user";
     homeDirectory = "/Users/user";
+    dir_tbx = "${params.homeDirectory}/toolbox";
+    dir_nb = "${params.homeDirectory}/Workspace/notebook";
+    dir_se = "${params.homeDirectory}/Workspace/spatialedge";
+    dir_vulture = "${params.homeDirectory}/Vulture";
   };
-  dir_tbx = "${params.homeDirectory}/toolbox";
-  dir_nb = "${params.homeDirectory}/Workspace/notebook";
-  dir_se = "${params.homeDirectory}/Workspace/spatialedge";
-  dir_vulture = "${params.homeDirectory}/Vulture";
 in
 {
 
@@ -39,10 +39,10 @@ in
   ];
 
   programs.zsh.shellAliases = {
-    se = "cd ${dir_se}";
-    awsl = "${dir_se}/scripts/vodacom-aws-auth/env/bin/python ${dir_se}/scripts/vodacom-aws-auth/aws_auth.py";
-    "rts-env" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
-    "rts-env-pip" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
+    se = "cd ${params.dir_se}";
+    awsl = "${params.dir_se}/scripts/vodacom-aws-auth/env/bin/python ${params.dir_se}/scripts/vodacom-aws-auth/aws_auth.py";
+    "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
+    "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
   };
 
   imports = [

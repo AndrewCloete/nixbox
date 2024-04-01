@@ -100,8 +100,7 @@ require("lazy").setup({
 		opts = {
 			plugins = {
 				tmux = { enabled = false },
-				gitsigns = { enabled = false 
-					,
+				gitsigns = { enabled = false},
 			},
 		},
 	},

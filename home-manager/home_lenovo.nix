@@ -1,11 +1,11 @@
 { inputs, config, pkgs, ... }:
 let
-  params = {
+  params = rec {
     user = "user";
     homeDirectory = "/home/user";
+    dir_tbx = "${params.homeDirectory}/toolbox";
+    dir_nb = "${params.homeDirectory}/Workspace/notebook";
   };
-  dir_tbx = "${params.homeDirectory}/toolbox";
-  dir_nb = "${params.homeDirectory}/Workspace/notebook";
 in
 {
   home.stateVersion = "23.11"; # Please read the comment before changing.
