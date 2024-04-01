@@ -24,6 +24,10 @@
         # see https://haseebmajid.dev/posts/2023-08-26-how-to-use-cachix-devenv-to-setup-developer-environments/
         extraSpecialArgs = { inherit inputs; };
       };
+      homeConfigurations."lenovo" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        modules = [ ./home_lenovo.nix ];
+      };
       homeConfigurations."linux" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         modules = [ ./home_linux.nix ];

@@ -22,11 +22,9 @@ in
 
   home.packages = with pkgs; [
     yazi
-    watchexec
     maven
     jdk17
     ansible
-    ts
     yarn
   ];
 
@@ -41,20 +39,15 @@ in
   ];
 
   programs.zsh.shellAliases = {
-    tbx = "cd ${dir_tbx}";
-    hm = "cd ${params.homeDirectory}/nixbox/home-manager";
-    nb = "cd ${dir_nb}";
     se = "cd ${dir_se}";
     awsl = "${dir_se}/scripts/vodacom-aws-auth/env/bin/python ${dir_se}/scripts/vodacom-aws-auth/aws_auth.py";
     "rts-env" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
     "rts-env-pip" = "source ${dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
-    "in" = "nvim ${dir_nb}/tiddly/tiddlers/Inbox.md";
-    rzsh = ". ${params.homeDirectory}/.zshrc";
-    dm = "node ${params.homeDirectory}/Workspace/digemy/digemy.devops/cli/dist/cli.js";
   };
 
   imports = [
     (import ./base.nix ({ inherit config pkgs params; }))
+    (import ./workstation.nix ({ inherit config pkgs params; }))
     ./extras.nix
   ];
 }
