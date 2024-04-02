@@ -26,6 +26,8 @@ in
     jdk17
     ansible
     yarn
+    php81
+    php81Packages.composer
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
