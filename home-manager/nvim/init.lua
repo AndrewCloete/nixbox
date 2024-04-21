@@ -100,7 +100,7 @@ require("lazy").setup({
 		opts = {
 			plugins = {
 				tmux = { enabled = false },
-				gitsigns = { enabled = false},
+				gitsigns = { enabled = false },
 			},
 		},
 	},
@@ -673,6 +673,15 @@ local markdown_snippets = {
 			return {
 				"---------------------------------------------------------------",
 				"# " .. os.date("%A, %d %B %Y"),
+				"",
+			}
+		end, {}),
+	}),
+	s("tom", {
+		f(function(args, snip)
+			return {
+				"---------------------------------------------------------------",
+				"# " .. os.date("%A, %d %B %Y", os.time() + 24 * 60 * 60),
 				"",
 			}
 		end, {}),
