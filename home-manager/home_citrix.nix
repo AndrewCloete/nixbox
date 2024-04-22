@@ -15,6 +15,8 @@ in
     pkgs.nodejs-18_x
     pkgs.python310
     pkgs.nodePackages."aws-cdk"
+    pkgs.openshift
+    pkgs.ruff
   ];
 
   imports = [
