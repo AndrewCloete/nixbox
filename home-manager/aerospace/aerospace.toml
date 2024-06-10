@@ -190,3 +190,12 @@ alt-shift-h = ['join-with left', 'mode main']
 alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
+
+
+# ======= Andrew custom config ======
+
+# Force brave to tile tabs
+[[on-window-detected]]
+check-further-callbacks = true
+if.app-id = 'com.brave.Browser'
+run = 'layout tiling'
