@@ -29,6 +29,7 @@ in
     php81
     php81Packages.composer
     ruff
+    qmk
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

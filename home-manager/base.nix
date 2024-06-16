@@ -133,6 +133,7 @@
       ls = "eza --icons --git --long";
       lt = "eza --tree --level=2 --long --icons --git";
       gtd = "gtd-cli";
+      i = "gtd-inbox";
       dc = "docker-compose";
       dcud = "docker-compose up -d";
       dcb = "docker-compose build";
