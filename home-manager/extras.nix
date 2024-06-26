@@ -10,6 +10,6 @@
     pkgs.python310
     pkgs.nodePackages."aws-cdk"
     pkgs.nodePackages.tiddlywiki
-    pkgs.terraform
+    # pkgs.terraform
   ];
 }
