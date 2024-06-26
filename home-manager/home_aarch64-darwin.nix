@@ -58,5 +58,6 @@ in
     (import ./base.nix ({ inherit config pkgs params; }))
     (import ./workstation.nix ({ inherit config pkgs params; }))
     ./extras.nix
+    ./picosdk.nix
   ];
 }
