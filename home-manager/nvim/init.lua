@@ -701,6 +701,11 @@ local markdown_snippets = {
 			return { "@s" .. os.date("%Y%m%d") }
 		end, {}),
 	}),
+	s("vis", {
+		f(function(args, snip)
+			return { "@v" .. os.date("%Y%m%d") }
+		end, {}),
+	}),
 	s("both", {
 		f(function(args, snip)
 			return { "@b" .. os.date("%Y%m%d") }
