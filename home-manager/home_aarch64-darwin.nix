@@ -29,16 +29,22 @@ in
     php81
     php81Packages.composer
     ruff
+    qmk
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = { };
+  home.file = {
+    ".aerospace.toml" = {
+      source = ./aerospace/aerospace.toml;
+      recursive = true;
+    };
+  };
 
   home.sessionVariables = { };
   home.sessionPath = [
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    "/Applications/Meld.app/Contents/MacOS"
+    # "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+    # "/Applications/Meld.app/Contents/MacOS"
   ];
 
   programs.zsh.shellAliases = {
@@ -49,8 +55,9 @@ in
   };
 
   imports = [
-    (import ./base.nix ({ inherit config pkgs params; }))
     (import ./workstation.nix ({ inherit config pkgs params; }))
-    ./extras.nix
+    (import ./extras.nix ({ inherit config pkgs params; }))
+    (import ./picosdk.nix ({ inherit config pkgs params; }))
+    (import ./base.nix ({ inherit config pkgs params; }))
   ];
 }

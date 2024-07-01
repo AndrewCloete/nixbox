@@ -123,8 +123,18 @@
     # This is the suggested workaround for the issue where the zsh PATH is
     # overwritten. Hopefully fixed somewhere in the future. See
     # https://github.com/nix-community/home-manager/issues/2991
-    profileExtra = pkgs.lib.optionalString (config.home.sessionPath != [ ]) ''
-      export PATH="$PATH''${PATH:+:}${pkgs.lib.concatStringsSep ":" config.home.sessionPath}"
+    # For some reason, sessionVariables do not work.. so we force them here.
+    # profileExtra = pkgs.lib.optionalString (config.home.sessionPath != [ ]) ''
+    #   export PATH="$PATH''${PATH:+:}${pkgs.lib.concatStringsSep ":" config.home.sessionPath}"
+    # '';
+
+    # The below is my own hack to try and fix the issue where
+    # home.sessionVariables does not have any effect. But I also think it fixes
+    # the issue above regarding the PATH being overwritten. Not sure yet, we'll
+    # need to see after a restart
+    initExtra = ''
+      unset __HM_SESS_VARS_SOURCED
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
 
     shellAliases = {
@@ -133,6 +143,7 @@
       ls = "eza --icons --git --long";
       lt = "eza --tree --level=2 --long --icons --git";
       gtd = "gtd-cli";
+      i = "gtd-inbox";
       dc = "docker-compose";
       dcud = "docker-compose up -d";
       dcb = "docker-compose build";

@@ -337,7 +337,7 @@ vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, { desc = "G
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord (grep" })
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
+vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" }) -- issues, errors
 vim.keymap.set("n", "<leader>sC", require("telescope.builtin").commands, { desc = "[S]earch [C]ommands" })
 vim.keymap.set("n", "<leader>sk", require("telescope.builtin").keymaps, { desc = "[S]earch [K]eymaps" })
 vim.keymap.set("n", "<leader>sm", require("telescope.builtin").man_pages, { desc = "[S]earch [m]anpages" })
@@ -701,6 +701,11 @@ local markdown_snippets = {
 			return { "@s" .. os.date("%Y%m%d") }
 		end, {}),
 	}),
+	s("vis", {
+		f(function(args, snip)
+			return { "@v" .. os.date("%Y%m%d") }
+		end, {}),
+	}),
 	s("both", {
 		f(function(args, snip)
 			return { "@b" .. os.date("%Y%m%d") }
@@ -809,6 +814,7 @@ vim.api.nvim_command("hi TreesitterContextBottom gui=underline guisp=Grey")
 
 -- Set hls color
 -- vim.api.nvim_command("hi Search guibg=grey guifg=wheat")
+--
 -- vim.api.nvim_command("hi DiffAdd guifg=NONE ctermfg=NONE guibg=#464632 ctermbg=238 gui=NONE cterm=NONE")
 -- vim.api.nvim_command("hi DiffChange guifg=NONE ctermfg=NONE guibg=#335261 ctermbg=239 gui=NONE cterm=NONE")
 -- vim.api.nvim_command("hi DiffDelete guifg=#f43753 ctermfg=203 guibg=#79313c ctermbg=237 gui=NONE cterm=NONE")
