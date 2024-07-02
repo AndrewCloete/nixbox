@@ -117,7 +117,7 @@
     enable = true;
     enableCompletion = true;
     history.share = false;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     syntaxHighlighting.enable = false; # Warning, makes paste slow
 
     # This is the suggested workaround for the issue where the zsh PATH is

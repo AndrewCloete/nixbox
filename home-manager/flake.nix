@@ -1,6 +1,9 @@
 {
   description = "Home Manager configuration of user";
 
+  # To update/upgrade packages
+  # nix flake update
+  # home-manager switch --flake .#<targer>
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
