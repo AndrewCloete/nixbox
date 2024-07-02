@@ -13,10 +13,12 @@ in
     pkgs.awscli2
     pkgs.dust
     pkgs.nodejs-18_x
-    pkgs.python310
     pkgs.nodePackages."aws-cdk"
     pkgs.openshift
     pkgs.ruff
+    pkgs.hey
+    pkgs."kubernetes-helm"
+    pkgs.glab
   ];
 
   imports = [
