@@ -39,12 +39,17 @@ in
       source = ./aerospace/aerospace.toml;
       recursive = true;
     };
+    ".config/alacritty/alacritty.toml" = {
+      source = ./alacritty/alacritty.toml;
+      recursive = true;
+    };
   };
 
   home.sessionVariables = { };
   home.sessionPath = [
     # "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     # "/Applications/Meld.app/Contents/MacOS"
+    "/Users/user/Workspace/spatialedge/bin"
   ];
 
   programs.zsh.shellAliases = {
