@@ -269,7 +269,7 @@ require("lazy").setup({
 
 require("onedark").setup({
 	style = "deep",
-	transparent = true
+	transparent = true,
 })
 require("onedark").load()
 
@@ -812,6 +812,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_command("hi TreesitterContextBottom gui=underline guisp=Grey")
+
+-- For Alacrity, I believe
+vim.o.termguicolors = true
 
 -- Set hls color
 -- vim.api.nvim_command("hi Search guibg=grey guifg=wheat")
