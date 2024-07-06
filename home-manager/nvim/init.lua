@@ -268,8 +268,8 @@ require("lazy").setup({
 }, {})
 
 require("onedark").setup({
-	style = "deep",
-	transparent = true,
+	style = "warmer",
+	-- transparent = true,
 })
 require("onedark").load()
 
@@ -667,6 +667,8 @@ local luasnip = require("luasnip")
 luasnip.config.setup({})
 local s = luasnip.snippet
 local f = luasnip.function_node
+luasnip.filetype_extend("javascript", { "javascriptreact" })
+luasnip.filetype_extend("javascript", { "html" })
 
 local markdown_snippets = {
 	s("td", {
