@@ -54,7 +54,7 @@ in
 
   programs.zsh.shellAliases = {
     se = "cd ${params.dir_se}";
-    awsl = "${params.dir_se}/scripts/vodacom-aws-auth/env/bin/python ${params.dir_se}/scripts/vodacom-aws-auth/aws_auth.py";
+    awsl = "${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/.venv/bin/python ${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/aws_auth.py";
     "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
     "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
   };

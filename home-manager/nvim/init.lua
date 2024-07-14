@@ -638,6 +638,33 @@ mason_lspconfig.setup_handlers({
 		})
 	end,
 })
+local lspconfig = require("lspconfig")
+lspconfig.emmet_ls.setup({
+	-- on_attach = on_attach,
+	capabilities = capabilities,
+	filetypes = {
+		"css",
+		"eruby",
+		"html",
+		"javascript",
+		"javascriptreact",
+		"less",
+		"sass",
+		"scss",
+		"svelte",
+		"pug",
+		"typescriptreact",
+		"vue",
+	},
+	init_options = {
+		html = {
+			options = {
+				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+				["bem.enabled"] = true,
+			},
+		},
+	},
+})
 
 -- rust-tools: Gives the nice inlay hints and code actions
 local rt = require("rust-tools")
@@ -670,7 +697,14 @@ local f = luasnip.function_node
 luasnip.filetype_extend("javascript", { "javascriptreact" })
 luasnip.filetype_extend("javascript", { "html" })
 
+local ptp = require("plaintextplanner")
+
 local markdown_snippets = {
+	s("d,mon,0", {
+		f(function(args, snip)
+			return { ptp.getNextWeekday("d,mon,0") }
+		end, {}),
+	}),
 	s("td", {
 		f(function(args, snip)
 			return {
@@ -730,6 +764,19 @@ local markdown_snippets = {
 		end, {}),
 	}),
 }
+
+for _, combo in ipairs(ptp.generate_combinations()) do
+	local function_node = f(function(args, snip)
+		return ptp.getNextWeekday(combo)
+	end, {})
+
+	table.insert(
+		markdown_snippets,
+		s(combo, {
+			function_node,
+		})
+	)
+end
 
 local common_contexts = { "rel", "mail", "proj", "read", "err", "sat", "rnd", "admin" }
 for _, ctx in ipairs(common_contexts) do

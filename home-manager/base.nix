@@ -39,6 +39,7 @@
     ripgrep
     jq
     rustup # run `rustup default stable` to install rustc and cargo
+    lua
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
