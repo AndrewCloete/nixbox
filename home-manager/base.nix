@@ -139,6 +139,7 @@
     '';
 
     shellAliases = {
+      v = "nvim";
       x = "exit";
       ll = "ls -l";
       ls = "eza --icons --git --long";
