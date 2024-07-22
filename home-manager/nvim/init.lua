@@ -365,7 +365,7 @@ vim.api.nvim_set_keymap(
 vim.keymap.set("n", "<leader>u", ":UndotreeToggle<CR>")
 
 vim.keymap.set("n", "<leader>gs", ":G<CR>", { desc = "Git status" })
-vim.keymap.set("n", "<leader>gd", ":Gdiff", { desc = "Git status" })
+vim.keymap.set("n", "<leader>gd", ":Gdiff<CR>", { desc = "Git status" })
 vim.keymap.set("n", "<leader>gb", ":G blame<CR>", { desc = "Git blame" })
 
 -- Moving between splits
