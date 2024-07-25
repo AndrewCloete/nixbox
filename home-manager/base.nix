@@ -161,6 +161,8 @@
       dcdv = "docker-compose down -v";
       dcl = "docker-compose logs";
       dclt = "docker-compose logs --tail=100";
+      gs = "git stash";
+      gsp = "git stash pop";
     };
     history.size = 10000;
     history.path = "${config.xdg.dataHome}/zsh/history";
