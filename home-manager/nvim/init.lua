@@ -269,7 +269,7 @@ require("lazy").setup({
 
 require("onedark").setup({
 	style = "warmer",
-	-- transparent = true,
+	transparent = true,
 })
 require("onedark").load()
 

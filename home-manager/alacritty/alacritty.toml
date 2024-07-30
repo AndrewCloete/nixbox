@@ -1,8 +1,5 @@
 live_config_reload = true
 
-[env]
-TERM = "xterm-256color"
-
 [window]
 decorations = "buttonless"
 dynamic_padding = false
@@ -15,6 +12,7 @@ y = 5
 [font]
 size = 15.0
 
+# See alacritty.md in knowlege base on installation details
 [font.bold]
 family = "JetBrainsMono Nerd Font"
 style = "Heavy"
@@ -25,8 +23,8 @@ style = "Heavy Italic"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
-style = "Medium Italic"
+style = "ExtraLight Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "Thin"
