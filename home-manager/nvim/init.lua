@@ -165,19 +165,19 @@ require("lazy").setup({
 	--   end,
 	-- },
 	-- {
-	--   'folke/tokyonight.nvim',
-	--   priority = 1000,
-	--   config = function()
-	--     vim.cmd.colorscheme "tokyonight"
-	--   end,
+	-- 	"folke/tokyonight.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("tokyonight-day")
+	-- 	end,
 	-- },
-	{
-		"rebelot/kanagawa.nvim",
-		priority = 1000,
-		config = function()
-			vim.cmd.colorscheme("kanagawa")
-		end,
-	},
+	-- {
+	-- 	"rebelot/kanagawa.nvim",
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.cmd.colorscheme("kanagawa")
+	-- 	end,
+	-- },
 	{
 		-- Set lualine as statusline
 		"nvim-lualine/lualine.nvim",
@@ -591,7 +591,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-	-- pyright = {},
+	-- pyright = { },
 	-- ruff_lsp = {},
 	-- tsserver = {},
 	-- clangd = {},

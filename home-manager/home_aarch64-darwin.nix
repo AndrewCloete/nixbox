@@ -33,6 +33,8 @@ in
     hey
     pre-commit
     copier
+    exercism
+    zig
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

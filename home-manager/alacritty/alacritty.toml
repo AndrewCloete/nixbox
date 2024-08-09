@@ -1,5 +1,9 @@
 live_config_reload = true
 
+# import = [
+#     "~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"
+# ]
+
 [window]
 decorations = "buttonless"
 dynamic_padding = false
@@ -28,3 +32,4 @@ style = "ExtraLight Italic"
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Thin"
+
