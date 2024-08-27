@@ -45,6 +45,7 @@
     fd
     ripgrep
     jq
+    yq
     rustup # run `rustup default stable` to install rustc and cargo
     lua
   ];

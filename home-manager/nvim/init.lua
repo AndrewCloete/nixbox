@@ -591,7 +591,17 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-	-- pyright = { },
+	pyright = {
+		settings = {
+			python = {
+				analysis = {
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					diagnosticMode = "openFilesOnly",
+				},
+			},
+		},
+	},
 	-- ruff_lsp = {},
 	-- tsserver = {},
 	-- clangd = {},
