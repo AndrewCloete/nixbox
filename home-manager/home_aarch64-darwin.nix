@@ -63,6 +63,7 @@ in
     awsl = "${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/.venv/bin/python ${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/aws_auth.py";
     "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
     "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
+    "ccc" = "while [ $? -eq 0 ]; do echo Delete; security delete-internet-password -l git-codecommit.eu-west-1.amazonaws.com ; done";
   };
 
   imports = [
