@@ -11,7 +11,7 @@
     pkgs.nodejs-18_x
     pkgs.nodePackages."aws-cdk"
     pkgs.nodePackages.tiddlywiki
-    pkgs.sbclPackages.duckdb
+    pkgs.duckdb
     # pkgs.terraform
   ];
 }
