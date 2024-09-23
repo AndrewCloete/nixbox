@@ -11,6 +11,14 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
   home.sessionVariables = { };
 
+  home.file = {
+    ".config/alacritty/alacritty.toml" = {
+      source = ./alacritty/alacritty.toml;
+      recursive = true;
+    };
+  };
+
+
   home.packages = with pkgs ; [
     pkgs.maven
     pkgs.jdk17
@@ -23,6 +31,7 @@ in
     pkgs.hey
     pkgs."kubernetes-helm"
     pkgs.glab
+    pkgs.mongosh
   ];
 
   programs.zsh.shellAliases = {
