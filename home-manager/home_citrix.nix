@@ -32,6 +32,8 @@ in
     pkgs."kubernetes-helm"
     pkgs.glab
     pkgs.mongosh
+    pkgs.watchexec
+    pkgs.duckdb
   ];
 
   programs.zsh.shellAliases = {

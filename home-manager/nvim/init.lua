@@ -562,7 +562,8 @@ local on_attach = function(client, bufnr)
 	--   vim.lsp.buf.format()
 	-- end, { desc = 'Format current buffer with LSP' })
 	-- vim.keymap.set('n', '<leader>f', ":Format<CR>:w<CR>")
-	local dont_auto_format = { "jdtls" }
+	local dont_auto_format = {}
+	-- local dont_auto_format = { "jdtls" }
 	local lsp_name = client.name
 	if not table.concat(dont_auto_format, ","):find(lsp_name, 1, true) then
 		vim.keymap.set("n", "<C-s>", "<cmd>lua vim.lsp.buf.format()<CR>:w<CR>")

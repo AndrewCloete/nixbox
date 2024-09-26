@@ -70,6 +70,12 @@
       source = ./nvim;
       recursive = true;
     };
+
+    # Copies my set of sh scripts nice for a workstation
+    "./.config/bin/" = {
+      source = ./bin;
+      recursive = true;
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -144,6 +150,7 @@
     initExtra = ''
       unset __HM_SESS_VARS_SOURCED
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+      source ~/.config/bin/functions.sh
     '';
 
     shellAliases = {
