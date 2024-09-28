@@ -669,6 +669,11 @@ lspconfig.emmet_ls.setup({
 		"vue",
 	},
 	init_options = {
+		userLanguages = {
+			eelixir = "html-eex",
+			eruby = "erb",
+			rust = "html",
+		},
 		html = {
 			options = {
 				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
