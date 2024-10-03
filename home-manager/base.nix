@@ -155,6 +155,7 @@
 
     shellAliases = {
       v = "nvim";
+      t = "tmux";
       x = "exit";
       ll = "ls -l";
       ls = "eza --icons --git --long";
