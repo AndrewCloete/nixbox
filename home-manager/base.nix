@@ -34,6 +34,7 @@
     # '')
     gnupg
     git
+    lazygit
     unzip
     wget
     xh
@@ -157,6 +158,7 @@
       v = "nvim";
       t = "tmux";
       x = "exit";
+      lg = "lazygit";
       ll = "ls -l";
       ls = "eza --icons --git --long";
       lt = "eza --tree --level=2 --long --icons --git";
