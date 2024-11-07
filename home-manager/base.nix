@@ -155,6 +155,7 @@
     '';
 
     shellAliases = {
+      k = "kubectl";
       v = "nvim";
       t = "tmux";
       x = "exit";
