@@ -81,7 +81,7 @@ require("lazy").setup({
 	"idanarye/vim-merginal",
 
 	-- Detect tabstop and shiftwidth automatically
-	"tpope/vim-sleuth",
+	-- "tpope/vim-sleuth",
 	-- TODO: Replace vinegar with telescope-file-browser
 	"tpope/vim-vinegar", -- no bullshit minimal netrw
 	"tpope/vim-tbone", -- tmux integration
@@ -306,6 +306,7 @@ vim.opt.conceallevel = 1
 require("onedark").setup({
 	style = "warmer",
 	transparent = true,
+	-- style = "light",
 })
 require("onedark").load()
 
@@ -435,6 +436,8 @@ vim.keymap.set("n", "<leader>ph", ":Gitsigns preview_hunk<CR>", { desc = "[P]rev
 
 vim.keymap.set("n", "<C-q>", "<cmd>q!<cr>")
 vim.keymap.set("n", "<leader>cl", "i- [ ] ")
+vim.keymap.set("n", "<leader>st", "^wi~<Esc>A~<Esc>^")
+vim.keymap.set("n", "<leader>ts", ":s/\\~//g<CR>")
 
 -- Dont bind the hunk shortcuts in diff mode. Diff uses these
 if vim.api.nvim_win_get_option(0, "diff") then
@@ -912,6 +915,17 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = "text,markdown,tex",
 	command = "setlocal textwidth=80",
 })
+
+-- Forces java files to preferred tab settings
+-- Does not work since JDTLS loads AFTER the file is loaded
+-- vim.api.nvim_create_autocmd("FileType", {
+-- 	pattern = "java",
+-- 	callback = function()
+-- 		vim.bo.tabstop = 4
+-- 		vim.bo.shiftwidth = 4
+-- 		vim.bo.expandtab = true
+-- 	end,
+-- })
 
 vim.api.nvim_command("hi TreesitterContextBottom gui=underline guisp=Grey")
 

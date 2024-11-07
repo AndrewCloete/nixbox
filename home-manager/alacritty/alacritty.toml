@@ -19,11 +19,11 @@ size = 15.0
 # See alacritty.md in knowlege base on installation details
 [font.bold]
 family = "JetBrainsMono Nerd Font"
-style = "Heavy"
+style = "Bold"
 
 [font.bold_italic]
 family = "JetBrainsMono Nerd Font"
-style = "Heavy Italic"
+style = "Bold Italic"
 
 [font.italic]
 family = "JetBrainsMono Nerd Font"
@@ -31,5 +31,5 @@ style = "ExtraLight Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
-style = "Thin"
+style = "Regular"
 
