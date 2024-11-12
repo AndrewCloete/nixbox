@@ -5,6 +5,8 @@
 , ...
 }: {
 
+
+
   # These 2 lines replaces the need to define a "~/.config/nix/nix.conf" and
   # set the "experimental-features, flake" flag in there. This creates that
   # file and sets the flag to enable "flakes". Not tested yet so leaving it in

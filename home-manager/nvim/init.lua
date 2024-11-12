@@ -278,6 +278,7 @@ require("lazy").setup({
 					path = "~/Workspace/notebook/obsidian_nb",
 				},
 			},
+			disable_frontmatter = true,
 
 			-- see below for full list of options 👇
 		},
