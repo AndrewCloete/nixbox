@@ -73,6 +73,7 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	--
 	"tpope/vim-commentary",
+	"tpope/vim-surround",
 
 	-- Git related plugins
 	"tpope/vim-fugitive",
