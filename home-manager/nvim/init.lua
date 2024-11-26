@@ -74,6 +74,7 @@ require("lazy").setup({
 	--
 	"tpope/vim-commentary",
 	"tpope/vim-surround",
+	"tpope/vim-repeat",
 
 	-- Git related plugins
 	"tpope/vim-fugitive",

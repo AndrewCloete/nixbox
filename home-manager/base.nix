@@ -45,6 +45,7 @@
     btop
     tldr
     eza
+    yazi
     fd
     ripgrep
     jq
@@ -71,6 +72,11 @@
     # See program.neovim on how it is used
     "./.config/nvim/" = {
       source = ./nvim;
+      recursive = true;
+    };
+
+    "./.config/yazi/" = {
+      source = ./yazi;
       recursive = true;
     };
 
@@ -160,6 +166,7 @@
       k = "kubectl";
       v = "nvim";
       t = "tmux";
+      y = "yazi";
       x = "exit";
       lg = "lazygit";
       ll = "ls -l";

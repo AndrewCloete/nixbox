@@ -37,7 +37,9 @@ cdg() {
     fi
 }
 
-fdcd() {
+
+# (cd) to any file in the current (t)ree
+cdt() {
     local file
     file=$(fd "$1" | fzf) 
 

@@ -21,9 +21,10 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    yazi
     maven
-    jdk17
+    # jdk17
+    jdk8
+    sl
     ansible
     yarn
     php81
@@ -35,7 +36,9 @@ in
     copier
     exercism
     zig
+    ffmpeg
     pkgs."kubernetes-helm"
+    imagemagick
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
