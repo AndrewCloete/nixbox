@@ -24,7 +24,6 @@ in
     maven
     # jdk17
     jdk8
-    sl
     ansible
     yarn
     php81
