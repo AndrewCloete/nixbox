@@ -62,7 +62,7 @@ extract_path_components() {
 mini_img() {
     local filepath="$1"
     extract_path_components "$filepath"
-    magick "${filepath}" -quality 25 "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.jpg"
+    magick "${filepath}" -quality $2 "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.jpg"
 }
 
 mini_vid() {
