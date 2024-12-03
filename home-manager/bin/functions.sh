@@ -52,5 +52,24 @@ cdt() {
     fi
 }
 
+extract_path_components() {
+    local filepath="$1"
+    SPLIT_DIRECTORY=$(dirname "$filepath")
+    SPLIT_FILENAME=$(basename "$filepath" | sed 's/\.[^.]*$//')
+    SPLIT_EXTENSION="${filepath##*.}"
+}
+
+mini_img() {
+    local filepath="$1"
+    extract_path_components "$filepath"
+    magick "${filepath}" -quality 25 "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.jpg"
+}
+
+mini_vid() {
+    local filepath="$1"
+    extract_path_components "$filepath"
+    ffmpeg -i "${filepath}" -vf "scale=1280:720" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4" 
+}
+
 alias lt="eza --tree --icons --git -L=3";
 alias ltl="lt --long";
