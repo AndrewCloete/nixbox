@@ -377,7 +377,12 @@ vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { des
 vim.keymap.set("n", "<C-p>", require("telescope.builtin").git_files, { desc = "Git files" })
 vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
 vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord (grep" })
-vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, {
+	desc = "[S]earch by [G]rep",
+	additional_args = function(_)
+		return { "--hidden" }
+	end,
+})
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" }) -- issues, errors
 vim.keymap.set("n", "<leader>sC", require("telescope.builtin").commands, { desc = "[S]earch [C]ommands" })
 vim.keymap.set("n", "<leader>sk", require("telescope.builtin").keymaps, { desc = "[S]earch [K]eymaps" })

@@ -160,7 +160,13 @@
     initExtra = ''
       unset __HM_SESS_VARS_SOURCED
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
+      # Load custom helper functions
       source ~/.config/bin/functions.sh
+
+      # Re-declare "bindkey" here at the bottom which set it to "vim mode"
+      # (fixes the "vim mode" issue)
+      bindkey -v
     '';
 
     shellAliases = {

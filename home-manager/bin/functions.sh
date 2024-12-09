@@ -59,13 +59,15 @@ extract_path_components() {
     SPLIT_EXTENSION="${filepath##*.}"
 }
 
-mini_img() {
+# Minify image
+mini() {
     local filepath="$1"
     extract_path_components "$filepath"
     magick "${filepath}" -quality $2 "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.jpg"
 }
 
-mini_vid() {
+# Minify video
+minv() {
     local filepath="$1"
     extract_path_components "$filepath"
     ffmpeg -i "${filepath}" -vf "scale=1280:720" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4" 
