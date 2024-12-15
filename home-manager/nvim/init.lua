@@ -353,6 +353,17 @@ require("telescope").setup({
 			use_fd = true,
 		},
 	},
+	pickers = {
+		live_grep = {
+			file_ignore_patterns = { "node_modules", ".git", ".venv" },
+			additional_args = function(_)
+				return { "--hidden" }
+			end,
+		},
+	},
+	extensions = {
+		"fzf",
+	},
 })
 
 -- Enable telescope fzf native, if installed
@@ -379,9 +390,6 @@ vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc
 vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord (grep" })
 vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, {
 	desc = "[S]earch by [G]rep",
-	additional_args = function(_)
-		return { "--hidden" }
-	end,
 })
 vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" }) -- issues, errors
 vim.keymap.set("n", "<leader>sC", require("telescope.builtin").commands, { desc = "[S]earch [C]ommands" })
@@ -653,7 +661,7 @@ local servers = {
 	-- ruff_lsp = {},
 	-- tsserver = {},
 	-- clangd = {},
-	-- gopls = {},
+	gopls = {},
 
 	-- When I installed rnix using Mason, then formatting worked...
 	-- lemminx = {},
@@ -907,7 +915,13 @@ null_ls.setup({
 			disabled_filetypes = { "markdown" },
 		}),
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.ruff, -- Python formatter
+
+		-- Python formatter
+		null_ls.builtins.formatting.ruff,
+
+		-- Go auto-format and auto-import (install with Mason afterward)
+		null_ls.builtins.formatting.gofumpt,
+		null_ls.builtins.formatting.goimports_reviser, -- More deterministic imports than goimports
 	},
 })
 

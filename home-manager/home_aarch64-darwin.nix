@@ -21,6 +21,7 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    serverless
     maven
     # jdk17
     jdk8
