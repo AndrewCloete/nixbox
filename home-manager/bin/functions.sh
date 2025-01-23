@@ -73,5 +73,9 @@ minv() {
     ffmpeg -i "${filepath}" -vf "scale=1280:720" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4" 
 }
 
+notify() {
+  osascript -e "display notification \"$1\" with title \"Notify\""
+}
+
 alias lt="eza --tree --icons --git -L=3";
 alias ltl="lt --long";

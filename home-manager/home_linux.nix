@@ -6,7 +6,13 @@ let
   };
 in
 {
+
   home.stateVersion = "23.11"; # Please read the comment before changing.
+
+  home.packages = with pkgs; [
+    nodejs
+  ];
+
   imports = [
     (import ./base.nix ({ inherit config pkgs params; }))
   ];
