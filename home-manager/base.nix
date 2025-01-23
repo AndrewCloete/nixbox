@@ -53,7 +53,6 @@
     rustup # run `rustup default stable` to install rustc and cargo
     go
     lua
-    sshfs
     rsync
   ];
 

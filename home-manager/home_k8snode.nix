@@ -12,14 +12,14 @@ in
 
   home.packages = with pkgs; [
     kubectl
-# Helm has plugins. The diff plugin is needed byt helmfile
-# Luckilly, nixpkgs provide "wrapHelm" to easily add these
-# https://nixos.wiki/wiki/Helm_and_Helmfile
+    # Helm has plugins. The diff plugin is needed byt helmfile
+    # Luckilly, nixpkgs provide "wrapHelm" to easily add these
+    # https://nixos.wiki/wiki/Helm_and_Helmfile
     (wrapHelm kubernetes-helm {
-        plugins = with pkgs.kubernetes-helmPlugins; [
-          helm-diff
-        ];
-      })
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-diff
+      ];
+    })
     helmfile
   ];
 
