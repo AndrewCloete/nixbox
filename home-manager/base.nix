@@ -109,6 +109,7 @@
   };
   home.sessionPath = [
     "${params.homeDirectory}/.cargo/bin"
+    "/usr/local/go/bin"
   ];
 
   # Let Home Manager install and manage itself.
