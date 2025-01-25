@@ -11,8 +11,9 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    cloudflared
     avahi
+    awscli2
+    # cloudflared # No, install via apt using offical docs
   ];
 
   imports = [
