@@ -53,6 +53,7 @@
     rustup # run `rustup default stable` to install rustc and cargo
     lua
     sshfs
+    rsync
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -108,6 +109,10 @@
   };
   home.sessionPath = [
     "${params.homeDirectory}/.cargo/bin"
+    # After npm install, you can set the "global" install dir as:
+    # mkdir ~/.npm-global
+    # npm config set prefix ~/.npm-global
+    "${params.homeDirectory}/.npm-global/bin"
   ];
 
   # Let Home Manager install and manage itself.
