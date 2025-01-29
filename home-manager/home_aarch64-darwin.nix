@@ -4,8 +4,8 @@ let
     user = "user";
     homeDirectory = "/Users/user";
     dir_tbx = "${params.homeDirectory}/toolbox";
-    dir_nb = "${params.homeDirectory}/Workspace/notebook";
-    dir_se = "${params.homeDirectory}/Workspace/spatialedge";
+    dir_nb = "${params.homeDirectory}/Workspace/journals/notebook";
+    dir_se = "${params.homeDirectory}/Workspace/journals/spatialedge";
     dir_vulture = "${params.homeDirectory}/Vulture";
   };
 in
@@ -24,7 +24,8 @@ in
     serverless
     maven
     # jdk17
-    jdk8
+    # jdk8
+    jdk11
     ansible
     yarn
     php81

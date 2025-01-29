@@ -11,21 +11,12 @@ in
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    kubectl
-# Helm has plugins. The diff plugin is needed byt helmfile
-# Luckilly, nixpkgs provide "wrapHelm" to easily add these
-# https://nixos.wiki/wiki/Helm_and_Helmfile
-    (wrapHelm kubernetes-helm {
-        plugins = with pkgs.kubernetes-helmPlugins; [
-          helm-diff
-        ];
-      })
-    helmfile
+    avahi
+    awscli2
+    # cloudflared # No, install via apt using offical docs
   ];
 
   imports = [
     (import ./base.nix ({ inherit config pkgs params; }))
-    (import ./workstation.nix ({ inherit config pkgs params; }))
-    ./extras.nix
   ];
 }

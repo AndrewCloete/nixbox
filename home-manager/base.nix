@@ -51,8 +51,8 @@
     jq
     yq
     rustup # run `rustup default stable` to install rustc and cargo
+    go
     lua
-    sshfs
     rsync
   ];
 
@@ -109,6 +109,8 @@
   };
   home.sessionPath = [
     "${params.homeDirectory}/.cargo/bin"
+    "/usr/local/go/bin"
+
     # After npm install, you can set the "global" install dir as:
     # mkdir ~/.npm-global
     # npm config set prefix ~/.npm-global
@@ -186,14 +188,14 @@
       lt = "eza --tree --level=2 --long --icons --git";
       gtd = "gtd-cli";
       i = "gtd-inbox";
-      dc = "docker-compose";
-      dcud = "docker-compose up -d";
-      dcb = "docker-compose build";
-      dck = "docker-compose kill";
-      dcs = "docker-compose stop";
-      dcdv = "docker-compose down -v";
-      dcl = "docker-compose logs";
-      dclt = "docker-compose logs --tail=100";
+      dc = "docker compose";
+      dcud = "docker compose up -d";
+      dcb = "docker compose build";
+      dck = "docker compose kill";
+      dcs = "docker compose stop";
+      dcdv = "docker compose down -v";
+      dcl = "docker compose logs";
+      dclt = "docker compose logs --tail=100";
       gs = "git stash";
       gsp = "git stash pop";
     };
