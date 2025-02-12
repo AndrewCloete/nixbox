@@ -15,6 +15,10 @@ rust-analyzer rust_analyzer
 typescript-language-server ts_ls
 zls
 
+# bash
+bashls (lsp)
+shellcheck (linter)
+
 
 # nix
 rnix-ls: Gives formatting

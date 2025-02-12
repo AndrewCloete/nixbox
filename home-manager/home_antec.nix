@@ -13,6 +13,8 @@ in
   home.packages = with pkgs; [
     avahi
     awscli2
+    wakeonlan
+    dust
     # cloudflared # No, install via apt using offical docs
   ];
 
