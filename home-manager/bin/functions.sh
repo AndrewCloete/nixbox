@@ -66,6 +66,18 @@ mini() {
     magick "${filepath}" -quality $2 "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.jpg"
 }
 
+
+# Scale down image preserving transparency (if applicable)
+scalei() {
+    local filepath="$1"
+    local scale_factor="$2"
+    extract_path_components "$filepath"
+
+    magick "$filepath" -resize "$((100/scale_factor))%" \
+           "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.${SPLIT_EXTENSION}"
+}
+
+
 # Minify video
 minv() {
     local filepath="$1"

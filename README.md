@@ -25,3 +25,18 @@ vim ~/.config/nix/nix.conf
 experimental-features = nix-command flakes
 """
 ```
+
+If you installed as `su`, you can enable nix for other users by
+```sh
+echo ". /etc/profile.d/nix.sh" >> /etc/profile
+```
+
+Check for at least one channel and add if none
+```sh
+# If the channel list is empty...
+nix-channel --list
+
+# .. you can add one like this
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+nix-channel --update
+```

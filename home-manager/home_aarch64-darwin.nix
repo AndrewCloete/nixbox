@@ -40,6 +40,7 @@ in
     ffmpeg
     pkgs."kubernetes-helm"
     imagemagick
+    zola
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
