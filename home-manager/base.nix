@@ -37,6 +37,7 @@
     gnupg
     git
     lazygit
+    delta
     unzip
     wget
     xh
@@ -127,12 +128,6 @@
     vimdiffAlias = true;
     extraConfig = ":luafile ~/.config/nvim/init.lua";
     extraPackages = [ pkgs.gcc pkgs.stylua ];
-  };
-
-  programs.git = {
-    enable = true;
-    userName = "user";
-    userEmail = "user@gmail.com";
   };
 
   programs.tmux = {

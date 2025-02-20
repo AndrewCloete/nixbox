@@ -15,6 +15,9 @@ in
     awscli2
     wakeonlan
     dust
+    zola
+    caddy
+    watchexec
     # cloudflared # No, install via apt using offical docs
   ];
 
