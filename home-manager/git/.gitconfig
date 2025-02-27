@@ -1,0 +1,31 @@
+# This is not loaded automatically since it may not apply everywhere. Use
+# git config -e --global
+[user]
+	name = user
+	email = user@something
+
+[core]
+    pager = delta
+	editor = nvim
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+
+[merge]
+    conflictstyle = zdiff3
+
+[credential]
+	UseHttpPath = true
+	helper = !aws --profile vdo codecommit credential-helper $@
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+
