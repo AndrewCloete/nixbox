@@ -85,6 +85,13 @@ minv() {
     ffmpeg -i "${filepath}" -vf "scale=1280:720" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4" 
 }
 
+trimv() {
+    local filepath="$1"
+    extract_path_components "$filepath"
+    # e.g. 00:01:00 
+    ffmpeg -ss "$2" -to "$3" -i "${filepath}" -c copy "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-trim.${SPLIT_EXTENSION}" 
+}
+
 notify() {
   osascript -e "display notification \"$1\" with title \"Notify\""
 }
