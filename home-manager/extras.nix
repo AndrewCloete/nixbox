@@ -4,7 +4,7 @@
 }:
 {
   home.packages = [
-    pkgs.awscli2
+    # pkgs.awscli2
     pkgs.dust
     pkgs.ssm-session-manager-plugin
     pkgs.python310
