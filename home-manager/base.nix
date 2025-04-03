@@ -56,6 +56,7 @@
     lua
     rsync
     nodejs
+    uv
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -110,6 +111,7 @@
     EDITOR = "nvim";
   };
   home.sessionPath = [
+    "/opt/homebrew/bin"
     "${params.homeDirectory}/.cargo/bin"
     "/usr/local/go/bin"
 

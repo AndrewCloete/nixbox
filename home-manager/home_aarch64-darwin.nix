@@ -23,9 +23,9 @@ in
   home.packages = with pkgs; [
     serverless
     maven
-    # jdk17
+    jdk17
     # jdk8
-    jdk11
+    # jdk11
     ansible
     yarn
     php81
@@ -63,12 +63,22 @@ in
     "/Users/user/Workspace/spatialedge/bin"
   ];
 
-  programs.zsh.shellAliases = {
-    se = "cd ${params.dir_se}";
-    awsl = "${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/.venv/bin/python ${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/aws_auth.py";
-    "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
-    "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
-    "ccc" = "while [ $? -eq 0 ]; do echo keychain clean; security delete-internet-password -l git-codecommit.eu-west-1.amazonaws.com 2>&1 > /dev/null ; done";
+  programs.zsh = {
+    shellAliases = {
+      se = "cd ${params.dir_se}";
+      awsl = "${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/.venv/bin/python ${params.homeDirectory}/Vulture/aws/vodacom-aws-auth/aws_auth.py";
+      "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
+      "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
+      "ccc" = "while [ $? -eq 0 ]; do echo keychain clean; security delete-internet-password -l git-codecommit.eu-west-1.amazonaws.com 2>&1 > /dev/null ; done";
+    };
+
+
+    # Install gcloud using the official method (i.e. not nix) https://cloud.google.com/sdk/docs/install
+    initExtra = ''
+      # gcloud autocomplete and $PATH addition
+      source /Users/user/Downloads/google-cloud-sdk/completion.zsh.inc
+      source /Users/user/Downloads/google-cloud-sdk/path.zsh.inc
+    '';
   };
 
   imports = [
