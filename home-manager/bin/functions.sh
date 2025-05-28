@@ -1,3 +1,11 @@
+funcs() {
+    echo "fds: (f)ind and (s)ave to tmux clipboard"
+    echo "fdv: (f)ind and (v)im a file"
+    echo "cdg: (cd) to any file in the current (g)it repo"
+    echo "cdt: (cd) to any file in the current (t)ree"
+    echo "cdr: (cd) to the (r)oot of the current git project"
+    echo "act: source .venv/bin/activate"
+}
 # (f)ind and (s)ave to tmux clipboard
 fds() {
     local file
@@ -50,6 +58,15 @@ cdt() {
     else
         echo "No file selected"
     fi
+}
+
+# (cd) to the (r)oot of the current git project
+cdr() {
+    cd "$(git rev-parse --show-toplevel)"
+}
+
+act() {
+    source .venv/bin/activate
 }
 
 extract_path_components() {

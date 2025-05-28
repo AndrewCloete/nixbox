@@ -932,10 +932,10 @@ vim.g.markdown_fenced_languages = { "html", "python", "bash", "sh", "json", "rus
 -- Default netrw to tree view
 vim.g.netrw_liststyle = 3
 
--- Auto break at line 80 for markdown files
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "text,markdown,tex",
-	command = "setlocal textwidth=80",
+	-- command = "setlocal textwidth=80", Auto break at line 80 for markdown files
+	command = "set wrap linebreak textwidth=0 wrapmargin=0",
 })
 
 -- Forces java files to preferred tab settings
