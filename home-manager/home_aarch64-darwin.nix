@@ -8,6 +8,10 @@ let
     dir_se = "${params.homeDirectory}/Workspace/journals/spatialedge";
     dir_vulture = "${params.homeDirectory}/Vulture";
   };
+
+  customYarnShim = pkgs.writeShellScriptBin "yarn" ''
+    exec "${pkgs.nodejs}/bin/node" "${pkgs.nodejs}/bin/corepack" yarn "$@"
+  '';
 in
 {
 
@@ -27,7 +31,6 @@ in
     # jdk8
     # jdk11
     ansible
-    yarn
     php81
     php81Packages.composer
     ruff
@@ -41,7 +44,12 @@ in
     pkgs."kubernetes-helm"
     imagemagick
     zola
+    cloudflared
+    customYarnShim
+    caddy
+    grpcurl
   ];
+
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

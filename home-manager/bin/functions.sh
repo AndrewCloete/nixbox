@@ -156,3 +156,7 @@ notify() {
 
 alias lt="eza --tree --icons --git -L=3";
 alias ltl="lt --long";
+
+last_files() {
+    find . -type f -print0 | xargs -0 stat -c '%Y %n' | sort -rn | head -n $1 | cut -d' ' -f2-
+}

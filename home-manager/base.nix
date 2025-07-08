@@ -171,6 +171,8 @@
 
       # Load custom helper functions
       source ~/.config/bin/functions.sh
+      # Load SE bastion script
+      source ~/.config/bin/bastion.sh
 
       # Re-declare "bindkey" here at the bottom which set it to "vim mode"
       # (fixes the "vim mode" issue)
