@@ -24,7 +24,7 @@ in
     pkgs.jdk17
     pkgs.awscli2
     pkgs.dust
-    pkgs.nodejs-18_x
+    pkgs.nodejs_20
     pkgs.nodePackages."aws-cdk"
     pkgs.openshift
     pkgs.ruff
