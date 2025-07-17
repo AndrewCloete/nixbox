@@ -64,3 +64,23 @@ vim.opt.foldlevel = 20
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.scrolloff = 8
+
+
+
+-- Global options (vim.opt or vim.o)
+-- Example: vim.opt.number = true
+
+-- For Alacrity, I believe
+vim.o.termguicolors = true
+
+-- Set hls color (this could be moved to themes if you prefer)
+-- vim.api.nvim_command("hi Search guibg=grey guifg=wheat")
+
+-- Default netrw to tree view
+vim.g.netrw_liststyle = 3
+
+-- Markdown fenced languages for syntax highlighting
+vim.g.markdown_fenced_languages = { "html", "python", "bash", "sh", "json", "rust", "java" }
+
+-- Treesitter context highlight
+vim.api.nvim_command("hi TreesitterContextBottom gui=underline guisp=Grey")
