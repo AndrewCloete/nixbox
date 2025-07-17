@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, unstablePkgs, ... }:
 let
   params = rec {
     user = "user";
@@ -13,7 +13,7 @@ in
 
 
   imports = [
-    (import ./base.nix ({ inherit config pkgs params; }))
+    (import ./base.nix ({ inherit config pkgs params unstablePkgs; }))
     (import ./workstation.nix ({ inherit config pkgs params; }))
     ./extras.nix
   ];
