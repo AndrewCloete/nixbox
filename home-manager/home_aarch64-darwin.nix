@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, unstablePkgs, ... }:
 let
   params = rec {
     user = "user";
@@ -93,6 +93,6 @@ in
     (import ./workstation.nix ({ inherit config pkgs params; }))
     (import ./extras.nix ({ inherit config pkgs params; }))
     (import ./picosdk.nix ({ inherit config pkgs params; }))
-    (import ./base.nix ({ inherit config pkgs params; }))
+    (import ./base.nix ({ inherit config pkgs params unstablePkgs; }))
   ];
 }

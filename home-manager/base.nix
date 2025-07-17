@@ -1,6 +1,7 @@
 # For all options see https://nix-community.github.io/home-manager/options.xhtml
 { config
 , pkgs
+, unstablePkgs
 , params
 , ...
 }: {

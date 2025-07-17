@@ -40,3 +40,12 @@ nix-channel --list
 nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --update
 ```
+
+# Ops
+```sh
+# Upgrade
+nix flake upgrade
+
+# Garbage collect
+nix-collect-garbage -d
+```
