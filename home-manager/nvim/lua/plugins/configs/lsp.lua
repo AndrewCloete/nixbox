@@ -118,7 +118,9 @@ require("mason").setup()
 local mason_lspconfig = require("mason-lspconfig")
 
 mason_lspconfig.setup({
-	ensure_installed = vim.tbl_keys(servers),
+	ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
+		"ruff",      -- For Python formatting/linting via ruff_format/ruff_fix
+	}),
 	-- This enables automatic setup of servers for which you don't provide custom setup below.
 	-- It uses the default setup from nvim-lspconfig.
 	automatic_installation = true, -- Add this line to automatically install servers

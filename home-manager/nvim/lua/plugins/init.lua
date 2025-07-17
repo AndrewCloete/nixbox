@@ -40,11 +40,10 @@ require("lazy").setup({
 
 	-- 'github/copilot.vim',
 
-	-- This is the easiest way to get prettierd to work
-	"jose-elias-alvarez/null-ls.nvim",
-
 	"nvim-tree/nvim-web-devicons",
 	-- 'onsails/lspkind-nvim',
+
+    { "stevearc/conform.nvim", opts = {} },
 
 	{
 		"folke/zen-mode.nvim",
@@ -247,7 +246,7 @@ require("lazy").setup({
 -- Load plugin configurations
 require("plugins.configs.lsp")
 require("plugins.configs.cmp")
-require("plugins.configs.null-ls")
+require("plugins.configs.conform")
 require("plugins.configs.telescope")
 require("plugins.configs.treesitter")
 -- require("plugins.configs.themes") -- If you decide to move theme setup here
