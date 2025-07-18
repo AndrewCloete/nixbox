@@ -160,3 +160,21 @@ alias ltl="lt --long";
 last_files() {
     find . -type f -print0 | xargs -0 stat -c '%Y %n' | sort -rn | head -n $1 | cut -d' ' -f2-
 }
+
+function get_pod() {
+  local PARTIAL_NAME="$1" # The first argument will be the partial name
+
+  # Get the full name of the first running pod matching the partial name
+  POD_FULL_NAME=$(kubectl get pods --field-selector=status.phase=Running -o custom-columns=NAME:.metadata.name 2>/dev/null | \
+                  grep "${PARTIAL_NAME}" | \
+                  head -n 1)
+
+  echo "$POD_FULL_NAME" # Output the found pod name
+  
+  # Return 0 for success, 1 for not found
+  if [ -z "$POD_FULL_NAME" ]; then
+    return 1
+  else
+    return 0
+  fi
+}
