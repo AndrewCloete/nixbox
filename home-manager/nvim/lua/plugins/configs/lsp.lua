@@ -1,8 +1,6 @@
 -- LSP settings.
 -- This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
-	print("HELLOOOOOOOOOOOOOOOOOOO - Inside on_attach") -- This should now print!
-
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
