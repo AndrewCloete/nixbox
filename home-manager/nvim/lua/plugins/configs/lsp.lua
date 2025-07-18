@@ -1,17 +1,12 @@
 -- LSP settings.
 -- This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(client, bufnr)
-	-- NOTE: Remember that lua is a real programming language, and as such it is possible
-	-- to define small helper and utility functions so you don't have to repeat yourself
-	-- many times.
-	--
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
+	print("HELLOOOOOOOOOOOOOOOOOOO - Inside on_attach") -- This should now print!
+
 	local nmap = function(keys, func, desc)
 		if desc then
 			desc = "LSP: " .. desc
 		end
-
 		vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 	end
 
@@ -25,12 +20,9 @@ local on_attach = function(client, bufnr)
 	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
 	nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
-	-- See `:help K` for why this keymap
-	-- Pro tip: do the command twice to move focus to the hover window and q to close it
 	nmap("K", vim.lsp.buf.hover, "Hover Documentation")
 	nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-	-- Lesser used LSP functionality
 	nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 	nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 	nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -38,13 +30,7 @@ local on_attach = function(client, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
 
-	-- Create a command `:Format` local to the LSP buffer
-	-- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-	--    vim.lsp.buf.format()
-	-- end, { desc = 'Format current buffer with LSP' })
-	-- vim.keymap.set('n', '<leader>f', ":Format<CR>:w<CR>")
 	local dont_auto_format = {}
-	-- local dont_auto_format = { "jdtls" }
 	local lsp_name = client.name
 	if not table.concat(dont_auto_format, ","):find(lsp_name, 1, true) then
 		vim.keymap.set("n", "<C-s>", "<cmd>lua vim.lsp.buf.format()<CR>:w<CR>")
@@ -66,90 +52,113 @@ require("neodev").setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- Enable the following language servers
--- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
--- Add any additional override configuration in the following tables. They will be passed to
--- the `settings` field of the server config. You must look up that documentation yourself.
-local servers = {
-	-- pyright = {
-	-- 	settings = {
-	-- 		python = {
-	-- 			analysis = {
-	-- 				autoSearchPaths = true,
-	-- 				useLibraryCodeForTypes = true,
-	-- 				diagnosticMode = "openFilesOnly",
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
-	-- ruff_lsp = {},
-	-- tsserver = {},
-	-- clangd = {},
-	gopls = {},
+-- Load lspconfig.util for root_pattern
+local lspconfig = require("lspconfig")
+local util = lspconfig.util
 
-	-- When I installed rnix using Mason, then formatting worked...
-	-- lemminx = {},
-	-- nil_ls = {}, -- LSP for Nix language
-	-- jdtls = {},
-	rust_analyzer = {
-		settings = {
-			["rust-analyzer"] = {
-				checkOnSave = {
-					command = "clippy",
-				},
+-- *** NEW MASON-LSPCONFIG V2.0.0+ API START ***
+
+-- 1. Configure each language server explicitly using vim.lsp.config()
+--    Settings go here, along with on_attach and capabilities.
+
+-- Pyright configuration
+vim.lsp.config("pyright", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	-- Essential: Ensure root_dir is correctly detected for Pyright
+	root_dir = util.root_pattern("pyproject.toml", "requirements.txt", ".git", "pyrightconfig.json", "setup.py")(
+		vim.fn.getcwd()
+	),
+	settings = {
+		python = {
+			analysis = {
+				diagnosticMode = "workspace", -- <--- THIS SHOULD FINALLY STICK!
+				autoSearchPaths = true,
+				useLibraryCodeForTypes = true,
+				-- If auto-detection of pythonPath fails, uncomment and set this to ABSOLUTE path
+				-- pythonPath = "/home/youruser/Workspace/se/pino/consultation-app/.venv/bin/python",
+			},
+		},
+		pyright = {
+			-- Add any other pyright-specific settings here
+			-- typeCheckingMode = "basic",
+		},
+	},
+})
+
+-- Rust Analyzer configuration
+vim.lsp.config("rust_analyzer", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
+		["rust-analyzer"] = {
+			checkOnSave = {
+				command = "clippy",
 			},
 		},
 	},
-	-- tsserver = {},
+})
 
-	lua_ls = {
+-- Lua LS configuration
+vim.lsp.config("lua_ls", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	settings = {
 		Lua = {
 			workspace = { checkThirdParty = false },
 			telemetry = { enable = false },
 		},
 	},
-}
-
--- Setup mason so it can manage external tooling
-require("mason").setup()
-
--- Ensure the servers above are installed
-local mason_lspconfig = require("mason-lspconfig")
-
-mason_lspconfig.setup({
-	ensure_installed = vim.list_extend(vim.tbl_keys(servers), {
-		"ruff",      -- For Python formatting/linting via ruff_format/ruff_fix
-	}),
-	-- This enables automatic setup of servers for which you don't provide custom setup below.
-	-- It uses the default setup from nvim-lspconfig.
-	automatic_installation = true, -- Add this line to automatically install servers
-	-- New for v2.x. This callback is executed for each server installed by Mason.
-	-- It provides a way to apply common settings or a default `on_attach`.
-	handlers = {
-		-- This is the default handler. It will be called for all servers Mason installs
-		-- that don't have a specific handler defined in this table or below this block.
-		-- It essentially takes care of the basic `lspconfig.setup` for all your servers.
-		function(server_name)
-			-- Only apply default setup if it's not a server we're handling explicitly later
-			-- in the `for` loop. This avoids double-setup or conflicts.
-			local server_opts = servers[server_name] or {}
-			require("lspconfig")[server_name].setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				settings = server_opts.settings, -- Pass through settings from your 'servers' table
-			})
-		end,
-	},
 })
 
--- The explicit setup for emmet_ls and rust_analyzer comes AFTER mason_lspconfig.setup()
--- because mason_lspconfig.setup() with a 'handlers' table now covers the automatic setup.
--- You still need to call specific `lspconfig.server_name.setup` for servers with unique configurations.
+-- Other servers (e.g., gopls, ruff_lsp, clangd, tsserver etc.)
+-- Configure them similarly. Example for gopls:
+vim.lsp.config("gopls", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	-- Add gopls specific settings here if any
+})
 
-local lspconfig = require("lspconfig")
+-- Ruff LSP (if you want to enable it for linting/formatting)
+vim.lsp.config("ruff_lsp", {
+	on_attach = on_attach,
+	capabilities = capabilities,
+	-- You might want to enable formatting capabilities for Ruff if you use it for that
+	-- init_options = {
+	--     capabilities = {
+	--         documentFormatting = true,
+	--     },
+	-- },
+})
+
+-- 2. Setup Mason and Mason-LSPConfig (NO HANDLERS HERE)
+--    This part tells Mason which servers to install and
+--    tells Mason-LSPConfig to enable auto-registration for installed servers.
+require("mason").setup()
+
+require("mason-lspconfig").setup({
+	-- The `ensure_installed` list is still used to tell Mason which servers to manage/install.
+	-- You can list them explicitly, or use `automatic_enable = true` to enable all.
+	ensure_installed = {
+		"pyright",
+		"rust_analyzer",
+		"lua_ls",
+		"gopls",
+		"ruff", -- Add ruff to ensure it's installed if you're using it
+		-- "black", "isort", "pylint", "flake8" -- If you want these as formatters/linters via Mason
+	},
+	-- `automatic_enable = true` is an alternative to `ensure_installed` if you want Mason to manage *all* detected servers.
+	-- automatic_enable = true,
+})
+
+-- *** NEW MASON-LSPCONFIG V2.0.0+ API END ***
+
+-- The explicit setup for emmet_ls and rust_tools remains outside as they are separate plugins
+-- that build *on top of* LSP, not just configure it.
+
+-- emmet_ls setup
 lspconfig.emmet_ls.setup({
-	-- on_attach = on_attach, -- You might want to call on_attach here if it's specific for emmet, otherwise the default handler covers it.
+	on_attach = on_attach, -- You might want to call on_attach here if it's specific for emmet
 	capabilities = capabilities,
 	filetypes = {
 		"css",
@@ -173,7 +182,6 @@ lspconfig.emmet_ls.setup({
 		},
 		html = {
 			options = {
-				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
 				["bem.enabled"] = true,
 			},
 		},
@@ -185,20 +193,19 @@ local rt = require("rust-tools")
 rt.setup({
 	server = {
 		on_attach = function(_, bufnr)
-			-- Lesson: you must call this first otherwise the hover_actions are overwritten
+			-- This is crucial: call your main on_attach first, then add rust-tools specific keymaps
 			on_attach(_, bufnr)
 			-- Hover actions
 			vim.keymap.set("n", "<leader>ca", rt.hover_actions.hover_actions, { buffer = bufnr })
 			-- Code action groups
 			vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
 		end,
-		-- Make sure to pass your rust_analyzer specific settings if you had any from the `servers` table
-		-- Example:
-		settings = servers.rust_analyzer.settings,
+		-- rust-tools typically gets its settings from lspconfig automatically,
+		-- but you can pass server settings here if needed
+		-- settings = servers.rust_analyzer.settings, -- Not needed if you use vim.lsp.config('rust_analyzer', ...)
 	},
 	tools = {
 		hover_actions = {
-			-- When opening "code actions" move the focus to the code actions window
 			auto_focus = true,
 		},
 	},

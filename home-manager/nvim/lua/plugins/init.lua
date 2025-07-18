@@ -43,7 +43,7 @@ require("lazy").setup({
 	"nvim-tree/nvim-web-devicons",
 	-- 'onsails/lspkind-nvim',
 
-    { "stevearc/conform.nvim", opts = {} },
+	{ "stevearc/conform.nvim", opts = {} },
 
 	{
 		"folke/zen-mode.nvim",
