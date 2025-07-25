@@ -18,6 +18,32 @@ function __gke_cleanup() {
 # Set global trap
 trap __gke_cleanup EXIT
 
+
+
+function gke_wrap() {
+    local port=8888
+    # Set new proxy for kubectl
+    function kubectl() {
+        HTTPS_PROXY=localhost:$port command kubectl "$@"
+    }
+
+    # Set new proxy for helm
+    function helm() {
+        HTTPS_PROXY=localhost:$port command helm "$@"
+    }
+
+    # Set new proxy for helmfile
+    function helmfile() {
+        HTTPS_PROXY=localhost:$port command helmfile "$@"
+    }
+
+    # Set new proxy for k9s
+    function k9s() {
+        HTTPS_PROXY=localhost:$port command k9s "$@"
+    }
+}
+
+
 function gke_connect() {
     local usage="
 Usage: gke_connect <cluster> <zone> <project> [--port <port>] [--instance <instance>]
@@ -153,27 +179,9 @@ Examples:
         return 1
     fi
 
-    # Set new proxy for kubectl
-    function kubectl() {
-        HTTPS_PROXY=localhost:$GKE_PROXY_PORT command kubectl "$@"
-    }
-
-    # Set new proxy for helm
-    function helm() {
-        HTTPS_PROXY=localhost:$GKE_PROXY_PORT command helm "$@"
-    }
-
-    # Set new proxy for helmfile
-    function helmfile() {
-        HTTPS_PROXY=localhost:$GKE_PROXY_PORT command helmfile "$@"
-    }
-
-    # Set new proxy for k9s
-    function k9s() {
-        HTTPS_PROXY=localhost:$GKE_PROXY_PORT command k9s "$@"
-    }
-
+    gke_wrap()
     # TODO: Add more proxies here!
+    
     
     echo "Connected! kubectl, helm, helmfile, and k9s commands are now proxied through the bastion host"
 }
