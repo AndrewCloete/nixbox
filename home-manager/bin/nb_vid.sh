@@ -56,9 +56,12 @@ OUT_DIR="/Users/user/Workspace/journals/notebook/obsidian_nb/TOC/Videos"
 
 
 MULTILINE_STRING="""---
-channel: ${CHANNEL_NAME}
+channel: [[${CHANNEL_NAME}]]
 url: ${YOUTUBE_URL}
 ---
+
+![${VIDEO_TITLE}](${YOUTUBE_URL})
+
 """
 
 echo $VIDEO_TITLE
