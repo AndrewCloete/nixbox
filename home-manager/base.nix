@@ -118,6 +118,7 @@
     "/opt/homebrew/bin"
     "${params.homeDirectory}/.cargo/bin"
     "/usr/local/go/bin"
+    "${params.homeDirectory}/nixbox/home-manager/bin"
 
     # After npm install, you can set the "global" install dir as:
     # mkdir ~/.npm-global
@@ -166,7 +167,7 @@
     # home.sessionVariables does not have any effect. But I also think it fixes
     # the issue above regarding the PATH being overwritten. Not sure yet, we'll
     # need to see after a restart
-    initExtra = ''
+    initContent = ''
       unset __HM_SESS_VARS_SOURCED
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
