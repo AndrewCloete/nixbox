@@ -59,6 +59,7 @@ MULTILINE_STRING="""---
 channel: [[${CHANNEL_NAME}]]
 url: ${YOUTUBE_URL}
 ---
+#Videos
 
 ![${VIDEO_TITLE}](${YOUTUBE_URL})
 
@@ -67,7 +68,13 @@ url: ${YOUTUBE_URL}
 echo $VIDEO_TITLE
 echo "$MULTILINE_STRING"
 
-echo "${MULTILINE_STRING}" > "${OUT_DIR}/${VIDEO_TITLE}.md"
+OUT_FILE="${OUT_DIR}/${VIDEO_TITLE}.md"
+if [ -f "$OUT_FILE" ]; then
+    echo "Error: File '$OUT_FILE' already exists. Exiting."
+    exit 1
+fi
+
+echo "${MULTILINE_STRING}" > "${OUT_FILE}"
 
 
 exit 0
