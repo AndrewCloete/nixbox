@@ -51,6 +51,7 @@
     fd
     ripgrep
     jq
+    jc # Converts popular tools output to json
     yq
     rustup # run `rustup default stable` to install rustc and cargo
     go

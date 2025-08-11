@@ -165,7 +165,7 @@ function get_pod() {
   local PARTIAL_NAME="$1" # The first argument will be the partial name
 
   # Get the full name of the first running pod matching the partial name
-  POD_FULL_NAME=$(kubectl get pods --field-selector=status.phase=Running -o custom-columns=NAME:.metadata.name 2>/dev/null | \
+  POD_FULL_NAME=$(kubectl get pods  --field-selector=status.phase=Running -o custom-columns=NAME:.metadata.name 2>/dev/null | \
                   grep "${PARTIAL_NAME}" | \
                   head -n 1)
 
