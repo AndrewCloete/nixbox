@@ -157,6 +157,66 @@ notify() {
 alias lt="eza --tree --icons --git -L=3";
 alias ltl="lt --long";
 
+
+# K8s
+alias kgp="kubectl get pods"
+alias kcx="kubectl config set-context --current --namespace"
+
+
+# Function to select a pod (compatible with Bash and Zsh)
+function ksp() {
+
+    kubectl get pods
+
+    # Save the original Internal Field Separator (IFS)
+    local old_ifs=$IFS
+    # Set IFS to split only on newlines
+    IFS=$'\n'
+
+    # Read pod names into an array by splitting the command output on newlines
+    local -a pods=($(kubectl get pods --no-headers -o custom-columns=NAME:.metadata.name))
+
+    # Restore the original IFS
+    IFS=$old_ifs
+
+    # Check if any pods were found
+    if [ ${#pods[@]} -eq 0 ]; then
+        echo "❌ No pods found in the current namespace."
+        return 1
+    fi
+
+    # Create an interactive menu using 'select'
+    PS3="👉 Select a pod: "
+    echo "Please select a pod to set as \$POD_NAME:"
+    select pod_name in "${pods[@]}"; do
+        if [ -n "$pod_name" ]; then
+            export POD_NAME=$pod_name
+            echo "✅ POD_NAME exported as: $POD_NAME"
+            unset PS3
+            break
+        else
+            echo "Invalid selection. Please try again."
+        fi
+    done
+}
+
+function kp() {
+    echo ${POD_NAME}
+}
+
+function kdp() {
+    kubectl describe pod ${POD_NAME}
+}
+
+function kl() {
+    kubectl logs ${POD_NAME}
+}
+
+function klf() {
+    kubectl logs ${POD_NAME} -f
+}
+
+
 last_files() {
     find . -type f -print0 | xargs -0 stat -c '%Y %n' | sort -rn | head -n $1 | cut -d' ' -f2-
 }
