@@ -30,6 +30,17 @@ fdv() {
     fi
 }
 
+rgv() {
+    local file
+    file=$(rg "$1" -l | fzf)  
+
+    if [[ -n "$file" ]]; then 
+        vim "$file"           
+    else
+        echo "No file selected"
+    fi
+}
+
 
 # (cd) to any file in the current (g)it repo
 cdg() {
