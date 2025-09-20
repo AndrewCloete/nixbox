@@ -28,6 +28,14 @@ local on_attach = function(client, bufnr)
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, "[W]orkspace [L]ist Folders")
 
+	-- Add rust-tools keymaps for rust_analyzer
+	if client.name == "rust_analyzer" then
+		local rt = require("rust-tools")
+		-- These bindings are rust-tools specific and override the general ca binding
+		nmap("<leader>ca", rt.hover_actions.hover_actions, "Hover Actions")
+		nmap("<leader>a", rt.code_action_group.code_action_group, "Code Action Group")
+	end
+
 	local dont_auto_format = {}
 	local lsp_name = client.name
 	if not table.concat(dont_auto_format, ","):find(lsp_name, 1, true) then
@@ -191,22 +199,9 @@ vim.lsp.config("emmet_ls", {
 -- rust-tools: Gives the nice inlay hints and code actions
 local rt = require("rust-tools")
 rt.setup({
-	server = {
-		on_attach = function(_, bufnr)
-			-- This is crucial: call your main on_attach first, then add rust-tools specific keymaps
-			on_attach(_, bufnr)
-			-- Hover actions
-			vim.keymap.set("n", "<leader>ca", rt.hover_actions.hover_actions, { buffer = bufnr })
-			-- Code action groups
-			vim.keymap.set("n", "<leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
-		end,
-		-- rust-tools typically gets its settings from lspconfig automatically,
-		-- but you can pass server settings here if needed
-		-- settings = servers.rust_analyzer.settings, -- Not needed if you use vim.lsp.config('rust_analyzer', ...)
-	},
-	tools = {
-		hover_actions = {
-			auto_focus = true,
-		},
-	},
+    tools = {
+        hover_actions = {
+            auto_focus = true,
+        },
+    },
 })
