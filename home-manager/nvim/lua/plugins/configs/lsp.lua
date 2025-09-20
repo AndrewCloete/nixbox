@@ -51,8 +51,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Load lspconfig.util for root_pattern
-local lspconfig = require("lspconfig")
-local util = lspconfig.util
+-- local lspconfig = require("lspconfig")
+-- local util = lspconfig.util
+local util = require("lspconfig.util")
 
 -- *** NEW MASON-LSPCONFIG V2.0.0+ API START ***
 
