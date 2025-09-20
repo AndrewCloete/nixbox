@@ -143,6 +143,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"gopls",
 		"ruff", -- Add ruff to ensure it's installed if you're using it
+		"emmet_ls",
 		-- "black", "isort", "pylint", "flake8" -- If you want these as formatters/linters via Mason
 	},
 	-- `automatic_enable = true` is an alternative to `ensure_installed` if you want Mason to manage *all* detected servers.
@@ -155,7 +156,7 @@ require("mason-lspconfig").setup({
 -- that build *on top of* LSP, not just configure it.
 
 -- emmet_ls setup
-lspconfig.emmet_ls.setup({
+vim.lsp.config("emmet_ls", {
 	on_attach = on_attach, -- You might want to call on_attach here if it's specific for emmet
 	capabilities = capabilities,
 	filetypes = {
