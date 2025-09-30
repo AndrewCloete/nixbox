@@ -1,5 +1,3 @@
-#!/bin/bash
-
 GKE_PORT=8888
 # Set new proxy for kubectl
 function kubectl() {

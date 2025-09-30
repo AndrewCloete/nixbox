@@ -154,9 +154,14 @@ Examples:
         return 1
     fi
 
-    gke_wrap.sh
-    
+    source /Users/user/nixbox/home-manager/bin/gke_wrap.sh
+
     echo "Connected! kubectl, helm, helmfile, and k9s commands are now proxied through the bastion host"
+}
+
+function gkec {
+    PINO_ENV=$1
+    gke_connect ph-core-k8s-${PINO_ENV} us-central1-a ph-core-shrd-${PINO_ENV}
 }
 
 function gke_disconnect() {
@@ -211,4 +216,9 @@ Arguments:
         echo "Error: No active connection found"
         return 1
     fi
+}
+
+
+function gked() {
+    gke_disconnect
 }

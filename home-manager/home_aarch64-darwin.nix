@@ -48,6 +48,7 @@ in
     customYarnShim
     caddy
     grpcurl
+    nixpacks
   ];
 
 
@@ -78,6 +79,7 @@ in
       "rts-env" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env.sh";
       "rts-env-pip" = "source ${params.dir_vulture}/aws/rts/rts-lib/packages/vodacom_rts_cdk/scripts/rts-env-pip.sh";
       "ccc" = "while [ $? -eq 0 ]; do echo keychain clean; security delete-internet-password -l git-codecommit.eu-west-1.amazonaws.com 2>&1 > /dev/null ; done";
+      "kwrap" = "source ${params.homeDirectory}/nixbox/home-manager/bin/gke_wrap.sh" ;
     };
 
 
