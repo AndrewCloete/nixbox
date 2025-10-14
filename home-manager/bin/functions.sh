@@ -249,3 +249,43 @@ function get_pod() {
     return 0
   fi
 }
+
+
+merge_vid() {
+    DIR="${1:-.}"
+    OUTPUT="${2:-output.mp4}"
+
+    # Check dependencies
+    if ! command -v ffmpeg &>/dev/null; then
+      echo "Error: ffmpeg not found in PATH." >&2
+      exit 1
+    fi
+
+    # Check directory
+    if [[ ! -d "$DIR" ]]; then
+      echo "Error: '$DIR' is not a directory." >&2
+      exit 1
+    fi
+
+    # Create list file
+    TMP_LIST="$(mktemp)"
+    trap 'rm -f "$TMP_LIST"' EXIT
+
+    # Find and sort video files (you can adjust extensions)
+    find "$DIR" -maxdepth 1 -type f \
+      \( -iname "*.mp4" -o -iname "*.mov" -o -iname "*.mkv" -o -iname "*.avi" \) \
+      | sort | while read -r f; do
+        # Escape single quotes for ffmpeg concat format
+        printf "file '%s'\n" "$(realpath "$f" | sed "s/'/'\\\\''/g")" >> "$TMP_LIST"
+      done
+
+    # Ensure there are files
+    if [[ ! -s "$TMP_LIST" ]]; then
+      echo "Error: No video files found in $DIR" >&2
+      exit 1
+    fi
+
+    echo "Merging videos listed in $TMP_LIST → $OUTPUT"
+    ffmpeg -f concat -safe 0 -i "$TMP_LIST" -c copy "$OUTPUT"
+    echo "✅ Merge complete: $OUTPUT"
+}
