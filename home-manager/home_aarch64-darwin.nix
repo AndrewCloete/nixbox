@@ -41,6 +41,8 @@ in
     exercism
     zig
     ffmpeg
+    yt-dlp
+    gifsicle
     pkgs."kubernetes-helm"
     imagemagick
     zola
