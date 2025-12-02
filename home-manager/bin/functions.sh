@@ -113,6 +113,34 @@ minv() {
     ffmpeg -i "${filepath}" -vf "scale=1280:720" -c:v libx264 -preset fast -crf 28 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4" 
 }
 
+
+minv2() {
+    local filepath="$1"
+    extract_path_components "$filepath"
+    ffmpeg -i "${filepath}" \
+        -vf "scale=1920:1080" \
+        -c:v libx264 \
+        -preset medium \
+        -crf 28 \
+        -c:a aac \
+        -b:a 64k \
+        -movflags +faststart \
+        "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-better-quality.mp4"
+}
+
+minv3 () {
+        local filepath="$1"
+        extract_path_components "$filepath"
+        ffmpeg -i "${filepath}" -vf "scale=1920:1080" -c:v libx264 -preset veryfast -crf 23 -tune film -pix_fmt yuv420p -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4"
+}
+
+minv_slow () {
+        local filepath="$1"
+        extract_path_components "$filepath"
+        # Corrected: -preset faster and -tune animation for libx265
+        ffmpeg -i "${filepath}" -c:v libx265 -preset faster -crf 23 -tune animation -pix_fmt yuv420p -tag:v hvc1 -c:a aac -b:a 64k -movflags +faststart "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-mini.mp4"
+}
+
 minv_med() {
     local filepath="$1"
     extract_path_components "$filepath"

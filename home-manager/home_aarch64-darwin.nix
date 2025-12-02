@@ -72,6 +72,7 @@ in
     # "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     # "/Applications/Meld.app/Contents/MacOS"
     "/Users/user/Workspace/spatialedge/bin"
+    "/Users/user/.local/bin"
   ];
 
   programs.zsh = {
