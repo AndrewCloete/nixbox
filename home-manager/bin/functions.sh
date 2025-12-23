@@ -125,7 +125,7 @@ minv2() {
         -c:a aac \
         -b:a 64k \
         -movflags +faststart \
-        "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-better-quality.mp4"
+        "${SPLIT_DIRECTORY}/${SPLIT_FILENAME}-compressed.mp4"
 }
 
 minv3 () {

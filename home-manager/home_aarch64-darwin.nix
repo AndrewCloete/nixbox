@@ -51,6 +51,7 @@ in
     caddy
     grpcurl
     nixpacks
+    paperkey
   ];
 
 
