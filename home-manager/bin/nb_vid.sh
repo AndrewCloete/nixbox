@@ -52,7 +52,9 @@ if [ -z "${CHANNEL_NAME}" ] || [ "${CHANNEL_NAME}" == "null" ]; then
 fi
 
 
-OUT_DIR="/Users/user/Workspace/journals/notebook/obsidian_nb/TOC/Videos"
+NB_DIR="/Users/user/Workspace/journals/notebook/obsidian_nb"
+VID_DIR="${NB_DIR}/TOC/Videos"
+
 
 
 MULTILINE_STRING="""---
@@ -68,13 +70,13 @@ url: ${YOUTUBE_URL}
 echo $VIDEO_TITLE
 echo "$MULTILINE_STRING"
 
-OUT_FILE="${OUT_DIR}/${VIDEO_TITLE}.md"
-if [ -f "$OUT_FILE" ]; then
-    echo "Error: File '$OUT_FILE' already exists. Exiting."
+VID_FILE="${VID_DIR}/${VIDEO_TITLE}.md"
+if [ -f "$VID_FILE" ]; then
+    echo "Error: File '$VID_FILE' already exists. Exiting."
     exit 1
 fi
 
-echo "${MULTILINE_STRING}" > "${OUT_FILE}"
+echo "${MULTILINE_STRING}" > "${VID_FILE}"
 
 
 exit 0
