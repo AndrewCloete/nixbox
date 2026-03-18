@@ -41,7 +41,7 @@ in
     exercism
     zig
     ffmpeg
-    yt-dlp
+    just
     gifsicle
     pkgs."kubernetes-helm"
     imagemagick
