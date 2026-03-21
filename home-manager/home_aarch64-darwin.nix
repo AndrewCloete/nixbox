@@ -52,6 +52,7 @@ in
     grpcurl
     nixpacks
     paperkey
+    typst
   ];
 
 

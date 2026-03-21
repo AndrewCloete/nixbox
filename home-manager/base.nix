@@ -125,6 +125,8 @@
     # After npm install, you can set the "global" install dir as:
     # mkdir ~/.npm-global
     # npm config set prefix ~/.npm-global
+    # Or install packages like this: 
+    #  NPM_CONFIG_PREFIX=$HOME/.npm-global npm install -g @anthropic-ai/claude-code
     "${params.homeDirectory}/.npm-global/bin"
   ];
 
