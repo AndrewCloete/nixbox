@@ -53,6 +53,7 @@ in
     nixpacks
     paperkey
     typst
+    hugo
   ];
 
 
