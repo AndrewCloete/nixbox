@@ -69,3 +69,14 @@ vim.keymap.set("n", "<leader>x", "<cmd>:%!xmllint --format -<CR>")
 -- Format current buffer with LSP (if available) or just save
 vim.keymap.set("n", "<leader>F", "<cmd>lua vim.lsp.buf.format()<CR>")
 vim.keymap.set("n", "<C-s>", ":w<CR>") -- Save only, skip formatting if no LSP attached.
+
+vim.keymap.set("n", "gk", function()
+	local clip = vim.fn.getreg("+")
+	local file, line = clip:match("^(.+):(%d+)$")
+	if file and line then
+		vim.cmd("edit +" .. line .. " " .. vim.fn.fnameescape(file))
+	else
+		vim.notify("Clipboard doesn't look like filepath:line → " .. clip, vim.log.levels.WARN)
+	end
+end, { desc = "Jump to filepath:line from clipboard" })
+
