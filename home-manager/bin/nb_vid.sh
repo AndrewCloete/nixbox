@@ -51,26 +51,49 @@ if [ -z "${CHANNEL_NAME}" ] || [ "${CHANNEL_NAME}" == "null" ]; then
     exit 1
 fi
 
+# 11-character id used in watch URLs, youtu.be, shorts, and embed HTML.
+VIDEO_ID=$(printf '%s' "${YOUTUBE_URL}" | sed -n 's/.*[?&]v=\([A-Za-z0-9_-]\{11\}\).*/\1/p' | head -n1)
+if [ -z "${VIDEO_ID}" ]; then
+    VIDEO_ID=$(printf '%s' "${YOUTUBE_URL}" | sed -n 's|.*youtu\.be/\([A-Za-z0-9_-]\{11\}\).*|\1|p' | head -n1)
+fi
+if [ -z "${VIDEO_ID}" ]; then
+    VIDEO_ID=$(printf '%s' "${YOUTUBE_URL}" | sed -n 's|.*/shorts/\([A-Za-z0-9_-]\{11\}\).*|\1|p' | head -n1)
+fi
+if [ -z "${VIDEO_ID}" ]; then
+    VIDEO_ID=$(echo "${JSON_RESPONSE}" | jq -r '.html // ""' | sed -n 's|.*/embed/\([^?"]*\).*|\1|p' | head -n1)
+fi
+if [ -z "${VIDEO_ID}" ] || [ "${VIDEO_ID}" == "null" ]; then
+    echo "Error: Could not determine YouTube video id from the URL or oEmbed response."
+    exit 1
+fi
+
+# Basename for the note file: no quotes, colons, or slashes (path-safe).
+VID_BASENAME=$(printf '%s' "${VIDEO_TITLE}" | tr -d '\r\n"' | tr ':/' '--')
+VID_BASENAME=$(printf '%s' "${VID_BASENAME}" | sed 's/[[:space:]]\{1,\}/ /g; s/^[[:space:]]*//; s/[[:space:]]*$//')
+if [ -z "${VID_BASENAME}" ]; then
+    VID_BASENAME="youtube_${VIDEO_ID}"
+fi
 
 NB_DIR="/Users/user/Workspace/journals/notebook/obsidian_nb"
-VID_DIR="${NB_DIR}/TOC/Videos"
+VID_DIR="${NB_DIR}/external/blog/reference/library/videos"
 
 
 
 MULTILINE_STRING="""---
+title: ${VIDEO_TITLE}
 channel: "\"[[${CHANNEL_NAME}]]\""
-url: ${YOUTUBE_URL}
+id: ${VIDEO_ID}
+video_url: ${YOUTUBE_URL}
 ---
-#Videos
 
 ![${VIDEO_TITLE}](${YOUTUBE_URL})
 
 """
 
-echo $VIDEO_TITLE
+echo "${VIDEO_TITLE}"
 echo "$MULTILINE_STRING"
 
-VID_FILE="${VID_DIR}/${VIDEO_TITLE}.md"
+VID_FILE="${VID_DIR}/${VID_BASENAME}.md"
 if [ -f "$VID_FILE" ]; then
     echo "Error: File '$VID_FILE' already exists. Exiting."
     exit 1
