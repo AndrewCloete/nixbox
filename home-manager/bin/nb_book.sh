@@ -36,6 +36,15 @@ if [ -n "$SUBTITLE" ] && [ "$SUBTITLE" != "null" ]; then
     SUBTITLE_YAML="subtitle: ${SUBTITLE}"$'\n'
 fi
 
+COVER_URL=$(echo "$BOOK_DATA" | jq -r --arg key "ISBN:${ISBN}" '
+  .[$key].cover // empty | .medium // .large // empty
+')
+COVER_BLOCK=""
+if [ -n "$COVER_URL" ] && [ "$COVER_URL" != "null" ]; then
+    COVER_BLOCK="![](<${COVER_URL}>)
+"$'\n'
+fi
+
 NB_DIR="/Users/user/Workspace/journals/notebook/obsidian_nb"
 BOOK_DIR="${NB_DIR}/external/blog/reference/library/books"
 
@@ -45,10 +54,10 @@ MULTILINE_STRING="$(
 title: ${TITLE}
 ${SUBTITLE_YAML}authors:
 ${AUTHORS}
-date: ${DATE}
 ${YEAR_YAML}ISBN: ${ISBN}
 ---
 
+${COVER_BLOCK}
 EOF
 )"
 

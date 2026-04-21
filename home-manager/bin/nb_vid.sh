@@ -82,8 +82,7 @@ VID_DIR="${NB_DIR}/external/blog/reference/library/videos"
 MULTILINE_STRING="""---
 title: ${VIDEO_TITLE}
 channel: "\"[[${CHANNEL_NAME}]]\""
-id: ${VIDEO_ID}
-video_url: ${YOUTUBE_URL}
+yt_id: ${VIDEO_ID}
 ---
 
 ![${VIDEO_TITLE}](${YOUTUBE_URL})
