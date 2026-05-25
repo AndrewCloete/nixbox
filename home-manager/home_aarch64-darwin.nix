@@ -90,7 +90,7 @@ in
 
 
     # Install gcloud using the official method (i.e. not nix) https://cloud.google.com/sdk/docs/install
-    initExtra = ''
+    initContent = ''
       # gcloud autocomplete and $PATH addition
       source /Users/user/Downloads/google-cloud-sdk/completion.zsh.inc
       source /Users/user/Downloads/google-cloud-sdk/path.zsh.inc
