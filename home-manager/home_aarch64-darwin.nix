@@ -102,5 +102,16 @@ in
     (import ./extras.nix ({ inherit config pkgs params; }))
     (import ./picosdk.nix ({ inherit config pkgs params; }))
     (import ./base.nix ({ inherit config pkgs params unstablePkgs; }))
+
+    # AI tools — shared MCP registry + per-tool config files
+    ./modules/ai-tools/mcp-servers.nix
+    ./modules/ai-tools/claude.nix
+    ./modules/ai-tools/gemini.nix
+    ./modules/ai-tools/opencode.nix
+    ./modules/ai-tools/skills.nix
+
+    # Editors — settings files for macOS GUI apps
+    ./modules/editors/zed.nix
+    ./modules/editors/vscode.nix
   ];
 }
