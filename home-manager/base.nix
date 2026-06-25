@@ -59,7 +59,7 @@
     lua
     rsync
     nodejs
-    uv
+    # uv.  Install ouside of nix using official install script
     fping
     nmap
     coreutils
@@ -128,6 +128,7 @@
     # Or install packages like this: 
     #  NPM_CONFIG_PREFIX=$HOME/.npm-global npm install -g @anthropic-ai/claude-code
     "${params.homeDirectory}/.npm-global/bin"
+    "${params.homeDirectory}/.local/bin" # for uv installed EXTERNALLY
   ];
 
   # Let Home Manager install and manage itself.
