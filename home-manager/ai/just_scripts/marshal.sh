@@ -2,10 +2,22 @@
 set -euo pipefail
 
 target="$1"
-sha=$(git rev-parse --short HEAD)
 # context: short SHA is deliberate — scraper tooling only needs to identify the
 # version, not do full commit lookups. Full SHA would be wasteful in frontmatter.
+sha=$(git rev-parse --short HEAD)
 ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+# --- Guard: dirty working tree in this directory ---
+dirty=$(git diff --name-only -- . && git diff --cached --name-only -- . && git ls-files --others --exclude-standard -- .)
+if [ -n "$dirty" ]; then
+    files_json=$(echo "$dirty" | jq -Rsc 'split("\n") | map(select(. != ""))')
+    echo "{\"level\":\"warning\",\"msg\":\"dirty working tree\",\"files\":$files_json}" >&2
+    if ! gum confirm "Uncommitted changes detected — SHA will be stamped INVALID. Proceed?"; then
+        echo "Aborted."
+        exit 0
+    fi
+    sha="INVALID"
+fi
 
 # --- Select constitution / skill items ---
 defaults_items=""
