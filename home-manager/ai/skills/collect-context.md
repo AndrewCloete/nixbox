@@ -1,3 +1,7 @@
+---
+default: true
+---
+
 # Collect distributed project context
 
 ## Why this system exists

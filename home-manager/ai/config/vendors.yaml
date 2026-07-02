@@ -1,0 +1,28 @@
+# context: OpenAI Codex is not listed here — AGENTS.md is its native entrypoint file,
+# so it reads the canonical content directly with no stub needed.
+# context: default: true means pre-selected in the gum picker during `just marshal`.
+# Claude and Gemini are the working defaults; all others are opt-in.
+- id: claude
+  description: Claude Code
+  file: CLAUDE.md
+  default: true
+- id: gemini
+  description: Gemini CLI
+  file: GEMINI.md
+  default: true
+- id: cursor
+  description: Cursor
+  file: .cursor/rules
+  default: false
+- id: copilot
+  description: GitHub Copilot
+  file: .github/copilot-instructions.md
+  default: false
+- id: cline
+  description: Cline
+  file: .clinerules
+  default: false
+- id: windsurf
+  description: Windsurf
+  file: .windsurfrules
+  default: false

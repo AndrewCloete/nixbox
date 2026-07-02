@@ -1,3 +1,7 @@
+---
+default: true
+---
+
 # Dependencies and Packages
 
 Before adding or upgrading a dependency, verify the latest stable version using a live

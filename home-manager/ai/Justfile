@@ -3,34 +3,9 @@ list:
     @find constitutions skills -name "*.md" | sort
 
 # Description: Interactively select constitution items and skills, then copy them with
-# version frontmatter to <target>. Requires gum (https://github.com/charmbracelet/gum).
-# Frontmatter records the source SHA so downstream tooling can track which version of
-# each item is installed in a project.
+# version frontmatter to <target>. Always writes AGENTS.md from templates/entrypoint.md
+# as the canonical AI entrypoint. Vendor stubs (CLAUDE.md, GEMINI.md, etc.) are thin
+# redirects to AGENTS.md — defaults come from config/vendors.yaml.
+# Requires gum (https://github.com/charmbracelet/gum) and yq.
 marshal target:
-    #!/usr/bin/env bash
-    set -euo pipefail
-
-    sha=$(git rev-parse HEAD)
-    ts=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-
-    items=$(find constitutions skills -name "*.md" | sort \
-        | gum choose --no-limit --header "Select items to marshal to '{{target}}'")
-
-    if [ -z "$items" ]; then
-        echo "No items selected — nothing written."
-        exit 0
-    fi
-
-    while IFS= read -r item; do
-        dest="{{target}}/$item"
-        mkdir -p "$(dirname "$dest")"
-        {
-            printf -- '---\n'
-            printf 'source_sha: %s\n' "$sha"
-            printf 'source_item: %s\n' "$item"
-            printf 'marshalled_at: %s\n' "$ts"
-            printf -- '---\n\n'
-            cat "$item"
-        } > "$dest"
-        echo "marshalled: $item -> $dest"
-    done <<< "$items"
+    @just_scripts/marshal.sh "{{target}}"

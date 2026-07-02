@@ -1,3 +1,7 @@
+---
+default: false
+---
+
 # Database and State-Store Migrations
 
 Any persistent store with a schema (relational DB, document store, vector index,

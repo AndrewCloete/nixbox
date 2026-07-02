@@ -1,3 +1,7 @@
+---
+default: true
+---
+
 # Logging
 
 Logs must be optimised for machine readability. All log output must be newline-delimited

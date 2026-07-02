@@ -1,3 +1,7 @@
+---
+default: true
+---
+
 # Justfile
 
 Every project must have a Justfile. If one does not exist, create it before writing
@@ -13,3 +17,6 @@ Requirements:
   without knowing the tool's defaults.
 - New commands discovered during a session must be added to the Justfile before the
   session ends.
+- If a recipe body exceeds one or two lines, extract it to a shell script in
+  `just_scripts/` and call it from the recipe. The Justfile remains a readable index
+  of available commands; the scripts contain the implementation detail.

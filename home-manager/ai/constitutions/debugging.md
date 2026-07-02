@@ -1,3 +1,7 @@
+---
+default: true
+---
+
 # Debugging Methodology
 
 Treat every error or unexpected behaviour as a **theory**, not a known fact. Before
